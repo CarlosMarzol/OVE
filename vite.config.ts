@@ -4,7 +4,21 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  // IMPORTANTE: Esto le dice a la web que está alojada en la carpeta /OVE/
-  // Si cambias el nombre del repositorio, debes cambiar esto también.
-  base: '/OVE/', 
+  // IMPORTANTE: Para Vercel, la base debe ser '/' (la raíz).
+  base: '/', 
+  build: {
+    // Aumentamos el límite de advertencia para chunks grandes (1000kb)
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        // Dividimos las librerías grandes en archivos separados para optimizar la carga
+        // y solucionar la advertencia de 'chunk size limit'
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          charts: ['recharts'],
+          utils: ['lucide-react', 'react-markdown', '@google/genai']
+        }
+      }
+    }
+  }
 })
