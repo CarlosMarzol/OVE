@@ -8,7 +8,6 @@ import {
   DollarSign, 
   Activity, 
   Search, 
-  Filter, 
   Droplets, 
   Landmark, 
   ShoppingCart, 
@@ -16,9 +15,12 @@ import {
   Minus,
   ArrowLeft,
   ChevronRight,
-  PieChart
+  PieChart,
+  RefreshCw,
+  ArrowRightLeft,
+  Calculator
 } from 'lucide-react';
-import { formatNumber, formatCurrency } from '../utils/format';
+import { formatNumber } from '../utils/format';
 
 // --- DEFINICIÓN DE TIPOS Y DATOS ---
 
@@ -65,6 +67,38 @@ interface StatItem {
   description?: string;
 }
 
+// Nueva interfaz para la tabla de divisas
+interface ExchangeRate {
+    code: string;
+    country: string;
+    buy: number;
+    sell: number;
+}
+
+const exchangeRatesList: ExchangeRate[] = [
+    { code: 'EUR', country: 'Zona Euro', buy: 325.340685, sell: 326.156075 },
+    { code: 'CNY', country: 'China', buy: 39.182153, sell: 39.280354 },
+    { code: 'TRY', country: 'Turquia', buy: 6.459581, sell: 6.475770 },
+    { code: 'RUB', country: 'Rusia', buy: 3.467910, sell: 3.476602 },
+    { code: 'USD', country: 'E.U.A.', buy: 275.885458, sell: 276.576900 },
+    { code: 'CAD', country: 'Canada', buy: 200.687756, sell: 201.190733 },
+    { code: 'INR', country: 'India', buy: 3.035344, sell: 3.042951 },
+    { code: 'JPY', country: 'Japon', buy: 1.784050, sell: 1.788521 },
+    { code: 'ARS', country: 'Argentina', buy: 0.189873, sell: 0.190349 },
+    { code: 'BRL', country: 'Brasil', buy: 50.594263, sell: 50.721066 },
+    { code: 'CLP', country: 'Chile', buy: 0.301735, sell: 0.302491 },
+    { code: 'COP', country: 'Colombia', buy: 0.071793, sell: 0.071973 },
+    { code: 'UYU', country: 'Uruguay', buy: 7.083431, sell: 7.101184 },
+    { code: 'PEN', country: 'Perú', buy: 81.918599, sell: 82.123909 },
+    { code: 'BOB', country: 'Bolivia', buy: 40.216539, sell: 40.317332 },
+    { code: 'MXP', country: 'Mexico', buy: 15.377005, sell: 15.415544 },
+    { code: 'CUC', country: 'Cuba', buy: 275.885458, sell: 276.576900 },
+    { code: 'NIO', country: 'Nicaragua', buy: 7.585397, sell: 7.604409 },
+    { code: 'DOP', country: 'R. Dominicana', buy: 4.310037, sell: 4.320839 },
+    { code: 'TTD', country: 'Trinidad', buy: 41.041558, sell: 41.144419 },
+    { code: 'ANG', country: 'Curazao', buy: 158.182133, sell: 158.578579 },
+];
+
 const statisticsData: StatItem[] = [
   // --- MACROECONOMÍA ---
   {
@@ -103,7 +137,7 @@ const statisticsData: StatItem[] = [
   {
     id: 'dolar-bcv',
     title: 'Dólar Oficial (BCV)',
-    value: 36.78,
+    value: 276.58,
     unit: 'VES',
     trend: 0.15,
     category: 'Monetario',
@@ -186,6 +220,198 @@ const statisticsData: StatItem[] = [
     description: 'Salario base + Bono de Guerra Económica indexado.'
   }
 ];
+
+// --- COMPONENTE: CONVERTIDOR DE MONEDAS ---
+const CurrencyConverter: React.FC = () => {
+    const [amount, setAmount] = useState<number>(100);
+    const [fromCurrency, setFromCurrency] = useState<string>('USD');
+    const [toCurrency, setToCurrency] = useState<string>('VES');
+    const [result, setResult] = useState<number>(0);
+    const [rateUsed, setRateUsed] = useState<number>(0);
+
+    // Lista combinada incluyendo VES
+    const allCurrencies = useMemo(() => {
+        const list = [...exchangeRatesList];
+        list.sort((a, b) => a.code.localeCompare(b.code));
+        return [{ code: 'VES', country: 'Venezuela', buy: 1, sell: 1 }, ...list];
+    }, []);
+
+    const handleSwap = () => {
+        setFromCurrency(toCurrency);
+        setToCurrency(fromCurrency);
+    };
+
+    useEffect(() => {
+        // Lógica de Conversión Bancaria
+        let rate = 0;
+        
+        // 1. Obtener datos de las monedas seleccionadas
+        const fromData = allCurrencies.find(c => c.code === fromCurrency);
+        const toData = allCurrencies.find(c => c.code === toCurrency);
+
+        if (fromData && toData) {
+            if (fromCurrency === 'VES' && toCurrency === 'VES') {
+                rate = 1;
+            } 
+            // Caso: Divisa -> VES (El banco TE COMPRA la divisa)
+            else if (toCurrency === 'VES') {
+                rate = fromData.buy;
+            }
+            // Caso: VES -> Divisa (El banco TE VENDE la divisa)
+            else if (fromCurrency === 'VES') {
+                rate = 1 / toData.sell; // Inverso porque la tasa está expresada en Bs por Dólar
+            }
+            // Caso: Divisa A -> Divisa B (Cross Rate: Vendes A a Bs, compras B con Bs)
+            else {
+                // Paso 1: Vendo A y obtengo Bolívares (Tasa Compra)
+                const vesAmount = 1 * fromData.buy; 
+                // Paso 2: Con esos Bolívares compro B (Tasa Venta)
+                rate = vesAmount / toData.sell;
+            }
+        }
+
+        setRateUsed(rate);
+        setResult(amount * rate);
+
+    }, [amount, fromCurrency, toCurrency, allCurrencies]);
+
+    return (
+        <div className="bg-gradient-to-br from-ven-dark to-[#00247D] text-white p-6 md:p-8 rounded-2xl shadow-xl border border-ven-blue/30 relative overflow-hidden mb-8 animate-slide-up">
+            {/* Background Decorations */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-ven-blue rounded-full filter blur-3xl opacity-20 transform translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-ven-yellow rounded-full filter blur-3xl opacity-10 transform -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
+
+            <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2 bg-white/10 rounded-lg backdrop-blur-sm">
+                        <Calculator className="w-6 h-6 text-ven-yellow" />
+                    </div>
+                    <div>
+                        <h3 className="text-xl font-bold">Convertidor Oficial BCV</h3>
+                        <p className="text-xs text-blue-200">Tasas oficiales del 16/12/2025</p>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-7 gap-4 items-center">
+                    {/* Input Amount */}
+                    <div className="md:col-span-2 space-y-2">
+                        <label className="text-xs font-bold text-blue-200 uppercase tracking-wider">Monto</label>
+                        <input 
+                            type="number" 
+                            value={amount}
+                            onChange={(e) => setAmount(Number(e.target.value))}
+                            className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-lg font-mono font-bold focus:outline-none focus:ring-2 focus:ring-ven-yellow placeholder-white/30"
+                            min="0"
+                        />
+                    </div>
+
+                    {/* From Currency */}
+                    <div className="md:col-span-2 space-y-2">
+                        <label className="text-xs font-bold text-blue-200 uppercase tracking-wider">De</label>
+                        <select 
+                            value={fromCurrency}
+                            onChange={(e) => setFromCurrency(e.target.value)}
+                            className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-base font-medium focus:outline-none focus:ring-2 focus:ring-ven-yellow appearance-none cursor-pointer"
+                        >
+                            {allCurrencies.map(c => (
+                                <option key={c.code} value={c.code} className="text-gray-900">{c.code} - {c.country}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    {/* Swap Button */}
+                    <div className="md:col-span-1 flex items-end justify-center pb-1">
+                        <button 
+                            onClick={handleSwap}
+                            className="p-3 rounded-full bg-ven-yellow text-ven-dark hover:bg-white hover:scale-110 transition-all shadow-lg"
+                            title="Intercambiar monedas"
+                        >
+                            <ArrowRightLeft size={20} />
+                        </button>
+                    </div>
+
+                    {/* To Currency */}
+                    <div className="md:col-span-2 space-y-2">
+                        <label className="text-xs font-bold text-blue-200 uppercase tracking-wider">A</label>
+                        <select 
+                            value={toCurrency}
+                            onChange={(e) => setToCurrency(e.target.value)}
+                            className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-base font-medium focus:outline-none focus:ring-2 focus:ring-ven-yellow appearance-none cursor-pointer"
+                        >
+                            {allCurrencies.map(c => (
+                                <option key={c.code} value={c.code} className="text-gray-900">{c.code} - {c.country}</option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+
+                {/* Result Display */}
+                <div className="mt-8 bg-black/20 rounded-xl p-6 flex flex-col md:flex-row justify-between items-center border border-white/5">
+                    <div className="text-center md:text-left mb-4 md:mb-0">
+                        <p className="text-sm text-blue-200 mb-1">Resultado de la conversión</p>
+                        <div className="flex items-baseline gap-2 justify-center md:justify-start">
+                            <span className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">{formatNumber(result, 4)}</span>
+                            <span className="text-xl font-bold text-ven-yellow">{toCurrency}</span>
+                        </div>
+                    </div>
+                    <div className="text-center md:text-right">
+                        <p className="text-xs text-blue-200 mb-1 font-mono uppercase">Tasa Aplicada</p>
+                        <p className="text-sm font-bold text-white">
+                            1 {fromCurrency} = {formatNumber(rateUsed, 6)} {toCurrency}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const ExchangeRatesTable: React.FC = () => {
+    return (
+        <div className="col-span-1 md:col-span-2 lg:col-span-4 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 overflow-hidden mt-6 animate-slide-up">
+            <div className="p-6 border-b border-gray-100 dark:border-slate-800 flex justify-between items-center">
+                <div>
+                    <h3 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+                        <Landmark className="text-ven-blue dark:text-ven-yellow w-5 h-5" /> Tipos de Cambio Oficiales
+                    </h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                        Tasas de referencia publicadas por el Banco Central de Venezuela al 16/12/2025.
+                    </p>
+                </div>
+            </div>
+            <div className="overflow-x-auto">
+                <table className="w-full text-sm text-left">
+                    <thead className="text-xs text-gray-500 uppercase bg-gray-50 dark:bg-slate-800 dark:text-gray-400">
+                        <tr>
+                            <th className="px-6 py-4 font-bold">Moneda</th>
+                            <th className="px-6 py-4 font-bold">País / Región</th>
+                            <th className="px-6 py-4 font-bold text-right">Compra (Bs.)</th>
+                            <th className="px-6 py-4 font-bold text-right">Venta (Bs.)</th>
+                        </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100 dark:divide-slate-800">
+                        {exchangeRatesList.map((rate) => (
+                            <tr key={rate.code} className="hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <td className="px-6 py-4 font-bold text-ven-blue dark:text-white">
+                                    {rate.code}
+                                </td>
+                                <td className="px-6 py-4 text-gray-600 dark:text-gray-300">
+                                    {rate.country}
+                                </td>
+                                <td className="px-6 py-4 text-right font-mono text-gray-700 dark:text-gray-200">
+                                    {formatNumber(rate.buy, 4)}
+                                </td>
+                                <td className="px-6 py-4 text-right font-mono font-bold text-gray-800 dark:text-white">
+                                    {formatNumber(rate.sell, 4)}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+};
 
 const Statistics: React.FC = () => {
   const { categorySlug } = useParams<{ categorySlug: string }>();
@@ -343,6 +569,9 @@ const Statistics: React.FC = () => {
             </div>
         </div>
 
+        {/* Convertidor de Monedas - Solo visible en 'Monetario' */}
+        {currentCategory === 'Monetario' && <CurrencyConverter />}
+
         {/* Grid de Datos */}
         {filteredData.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-slide-up">
@@ -424,6 +653,10 @@ const Statistics: React.FC = () => {
                 </button>
             </div>
         )}
+        
+        {/* Nueva Tabla de Tipos de Cambio - Solo para Monetario */}
+        {currentCategory === 'Monetario' && <ExchangeRatesTable />}
+
       </div>
     </div>
   );

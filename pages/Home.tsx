@@ -77,7 +77,7 @@ const Home: React.FC = () => {
                                 <span className="text-[10px] font-bold text-ven-blue dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded-md border border-blue-100 dark:border-blue-900/50">BCV</span>
                             </div>
                             <p className="text-sm font-semibold text-gray-400 dark:text-gray-500 mb-1 uppercase tracking-wide">Tasa Oficial</p>
-                            <p className="text-3xl font-extrabold text-gray-800 dark:text-white">{formatNumber(36.7)} <span className="text-sm text-gray-400 font-medium">VES</span></p>
+                            <p className="text-3xl font-extrabold text-gray-800 dark:text-white">{formatNumber(276.58)} <span className="text-sm text-gray-400 font-medium">VES</span></p>
                         </div>
                         
                         <div className="bg-ven-dark dark:bg-slate-800 p-6 rounded-2xl shadow-xl shadow-ven-blue/20 dark:shadow-black/40 col-span-2 transform -translate-y-4 border border-ven-blue/30 dark:border-slate-700 animate-slide-up transition-colors" style={{animationDelay: '300ms'}}>

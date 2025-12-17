@@ -10,15 +10,17 @@ interface TickerItem {
   unit?: string;
 }
 
+// Datos actualizados al 16/12/2025
 const data: TickerItem[] = [
-  { symbol: 'BCV (USD)', value: 36.78, change: 0.15 },
+  { symbol: 'BCV (USD)', value: 276.58, change: 0.15 },
+  { symbol: 'Euro (BCV)', value: 326.16, change: 0.05 },
+  { symbol: 'Yuan (CNY)', value: 39.28, change: 0.02 },
+  { symbol: 'Lira (TRY)', value: 6.48, change: -0.01 },
+  { symbol: 'Rublo (RUB)', value: 3.48, change: 0.01 },
+  { symbol: 'Real (BRL)', value: 50.72, change: 0.12 },
   { symbol: 'Crudo Merey', value: 64.30, change: -1.2, unit: '$' },
   { symbol: 'Inflación Men.', value: 2.4, change: 0.2, unit: '%' },
-  { symbol: 'Euro (BCV)', value: 39.42, change: 0.05 },
   { symbol: 'Reservas Int.', value: 9850, change: -0.1, unit: 'MM' },
-  { symbol: 'Cesta OPEP', value: 78.40, change: 0.8, unit: '$' },
-  { symbol: 'Oro (gr)', value: 65.20, change: 1.5, unit: '$' },
-  { symbol: 'Riesgo País', value: 14200, change: 0.0, unit: 'pts' },
 ];
 
 const Ticker: React.FC = () => {
