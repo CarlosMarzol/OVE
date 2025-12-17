@@ -26,7 +26,6 @@ import { formatNumber } from '../utils/format';
 
 type Category = 'Todos' | 'Macroeconomía' | 'Monetario' | 'Energía' | 'Social';
 
-// Mapeo de SLUGS (URL) a Nombres de Categoría
 const categoryMap: Record<string, Category> = {
     'macroeconomia': 'Macroeconomía',
     'monetario': 'Monetario',
@@ -34,7 +33,6 @@ const categoryMap: Record<string, Category> = {
     'social': 'Social'
 };
 
-// Información descriptiva por categoría para el Header de la sub-página
 const categoryInfo: Record<string, { description: string, icon: React.ReactNode }> = {
     'Macroeconomía': {
         description: 'Indicadores agregados que reflejan el estado general de la economía, incluyendo PIB e inflación.',
@@ -59,15 +57,13 @@ interface StatItem {
   title: string;
   value: string | number;
   unit: string;
-  trend: number; // Porcentaje de cambio
-  trendLabel?: string;
+  trend: number; 
   category: Category;
   type: 'card' | 'chart_large';
-  component?: React.ReactNode; // Para gráficos complejos
+  component?: React.ReactNode; 
   description?: string;
 }
 
-// Nueva interfaz para la tabla de divisas
 interface ExchangeRate {
     code: string;
     country: string;
@@ -100,7 +96,6 @@ const exchangeRatesList: ExchangeRate[] = [
 ];
 
 const statisticsData: StatItem[] = [
-  // --- MACROECONOMÍA ---
   {
     id: 'inflacion-kpi',
     title: 'Inflación Mensual',
@@ -132,8 +127,6 @@ const statisticsData: StatItem[] = [
     type: 'card',
     description: 'Estimación de crecimiento económico anual.'
   },
-
-  // --- MONETARIO ---
   {
     id: 'dolar-bcv',
     title: 'Dólar Oficial (BCV)',
@@ -175,8 +168,6 @@ const statisticsData: StatItem[] = [
     component: <ExchangeChart />,
     description: 'Comparativa entre tasa oficial y mercado paralelo.'
   },
-
-  // --- ENERGÍA ---
   {
     id: 'oil-production',
     title: 'Producción Petrolera',
@@ -197,8 +188,6 @@ const statisticsData: StatItem[] = [
     type: 'card',
     description: 'Precio promedio del crudo venezolano de referencia.'
   },
-
-  // --- SOCIAL ---
   {
     id: 'food-basket',
     title: 'Canasta Alimentaria',
@@ -213,7 +202,7 @@ const statisticsData: StatItem[] = [
     id: 'min-wage',
     title: 'Ingreso Mínimo Integral',
     value: 130,
-    unit: 'USD (Index)',
+    unit: 'USD',
     trend: 0,
     category: 'Social',
     type: 'card',
@@ -221,7 +210,6 @@ const statisticsData: StatItem[] = [
   }
 ];
 
-// --- COMPONENTE: CONVERTIDOR DE MONEDAS ---
 const CurrencyConverter: React.FC = () => {
     const [amount, setAmount] = useState<number>(100);
     const [fromCurrency, setFromCurrency] = useState<string>('USD');
@@ -229,7 +217,6 @@ const CurrencyConverter: React.FC = () => {
     const [result, setResult] = useState<number>(0);
     const [rateUsed, setRateUsed] = useState<number>(0);
 
-    // Lista combinada incluyendo VES
     const allCurrencies = useMemo(() => {
         const list = [...exchangeRatesList];
         list.sort((a, b) => a.code.localeCompare(b.code));
@@ -242,42 +229,28 @@ const CurrencyConverter: React.FC = () => {
     };
 
     useEffect(() => {
-        // Lógica de Conversión Bancaria
         let rate = 0;
-        
-        // 1. Obtener datos de las monedas seleccionadas
         const fromData = allCurrencies.find(c => c.code === fromCurrency);
         const toData = allCurrencies.find(c => c.code === toCurrency);
 
         if (fromData && toData) {
             if (fromCurrency === 'VES' && toCurrency === 'VES') {
                 rate = 1;
-            } 
-            // Caso: Divisa -> VES (El banco TE COMPRA la divisa)
-            else if (toCurrency === 'VES') {
+            } else if (toCurrency === 'VES') {
                 rate = fromData.buy;
-            }
-            // Caso: VES -> Divisa (El banco TE VENDE la divisa)
-            else if (fromCurrency === 'VES') {
-                rate = 1 / toData.sell; // Inverso porque la tasa está expresada en Bs por Dólar
-            }
-            // Caso: Divisa A -> Divisa B (Cross Rate: Vendes A a Bs, compras B con Bs)
-            else {
-                // Paso 1: Vendo A y obtengo Bolívares (Tasa Compra)
+            } else if (fromCurrency === 'VES') {
+                rate = 1 / toData.sell;
+            } else {
                 const vesAmount = 1 * fromData.buy; 
-                // Paso 2: Con esos Bolívares compro B (Tasa Venta)
                 rate = vesAmount / toData.sell;
             }
         }
-
         setRateUsed(rate);
         setResult(amount * rate);
-
     }, [amount, fromCurrency, toCurrency, allCurrencies]);
 
     return (
         <div className="bg-gradient-to-br from-ven-dark to-[#00247D] text-white p-6 md:p-8 rounded-2xl shadow-xl border border-ven-blue/30 relative overflow-hidden mb-8 animate-slide-up">
-            {/* Background Decorations */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-ven-blue rounded-full filter blur-3xl opacity-20 transform translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-ven-yellow rounded-full filter blur-3xl opacity-10 transform -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
 
@@ -293,7 +266,6 @@ const CurrencyConverter: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-7 gap-4 items-center">
-                    {/* Input Amount */}
                     <div className="md:col-span-2 space-y-2">
                         <label className="text-xs font-bold text-blue-200 uppercase tracking-wider">Monto</label>
                         <input 
@@ -304,8 +276,6 @@ const CurrencyConverter: React.FC = () => {
                             min="0"
                         />
                     </div>
-
-                    {/* From Currency */}
                     <div className="md:col-span-2 space-y-2">
                         <label className="text-xs font-bold text-blue-200 uppercase tracking-wider">De</label>
                         <select 
@@ -318,19 +288,11 @@ const CurrencyConverter: React.FC = () => {
                             ))}
                         </select>
                     </div>
-
-                    {/* Swap Button */}
                     <div className="md:col-span-1 flex items-end justify-center pb-1">
-                        <button 
-                            onClick={handleSwap}
-                            className="p-3 rounded-full bg-ven-yellow text-ven-dark hover:bg-white hover:scale-110 transition-all shadow-lg"
-                            title="Intercambiar monedas"
-                        >
+                        <button onClick={handleSwap} className="p-3 rounded-full bg-ven-yellow text-ven-dark hover:bg-white hover:scale-110 transition-all shadow-lg">
                             <ArrowRightLeft size={20} />
                         </button>
                     </div>
-
-                    {/* To Currency */}
                     <div className="md:col-span-2 space-y-2">
                         <label className="text-xs font-bold text-blue-200 uppercase tracking-wider">A</label>
                         <select 
@@ -345,7 +307,6 @@ const CurrencyConverter: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Result Display */}
                 <div className="mt-8 bg-black/20 rounded-xl p-6 flex flex-col md:flex-row justify-between items-center border border-white/5">
                     <div className="text-center md:text-left mb-4 md:mb-0">
                         <p className="text-sm text-blue-200 mb-1">Resultado de la conversión</p>
@@ -415,21 +376,17 @@ const ExchangeRatesTable: React.FC = () => {
 
 const Statistics: React.FC = () => {
   const { categorySlug } = useParams<{ categorySlug: string }>();
-  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Determinar la categoría actual basada en la URL
   const currentCategory: Category | 'Todos' = categorySlug && categoryMap[categorySlug] 
     ? categoryMap[categorySlug] 
     : 'Todos';
 
-  // Scroll to top cuando cambia la categoría
   useEffect(() => {
     window.scrollTo(0,0);
     setSearchQuery('');
   }, [categorySlug]);
 
-  // Lógica de filtrado
   const filteredData = useMemo(() => {
     return statisticsData.filter(item => {
       const matchesCategory = currentCategory === 'Todos' || item.category === currentCategory;
@@ -441,7 +398,6 @@ const Statistics: React.FC = () => {
     });
   }, [currentCategory, searchQuery]);
 
-  // VISTA: DASHBOARD PRINCIPAL (HUB)
   if (currentCategory === 'Todos') {
     return (
         <div className="pt-28 pb-20 bg-ven-light dark:bg-slate-950 min-h-screen transition-colors duration-300">
@@ -454,7 +410,6 @@ const Statistics: React.FC = () => {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-                    {/* Tarjeta Macro */}
                     <Link to="/estadisticas/macroeconomia" className="group bg-white dark:bg-slate-900 p-8 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-ven-red/30 transition-all relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-ven-red/5 rounded-full -mr-10 -mt-10 group-hover:bg-ven-red/10 transition-colors"></div>
                         <div className="relative z-10">
@@ -466,8 +421,6 @@ const Statistics: React.FC = () => {
                             <span className="inline-flex items-center font-bold text-ven-red text-sm">Ver Indicadores <ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform"/></span>
                         </div>
                     </Link>
-
-                    {/* Tarjeta Monetario */}
                     <Link to="/estadisticas/monetario" className="group bg-white dark:bg-slate-900 p-8 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-ven-blue/30 transition-all relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-ven-blue/5 rounded-full -mr-10 -mt-10 group-hover:bg-ven-blue/10 transition-colors"></div>
                         <div className="relative z-10">
@@ -479,8 +432,6 @@ const Statistics: React.FC = () => {
                             <span className="inline-flex items-center font-bold text-ven-blue text-sm">Ver Indicadores <ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform"/></span>
                         </div>
                     </Link>
-
-                    {/* Tarjeta Energia */}
                     <Link to="/estadisticas/energia" className="group bg-white dark:bg-slate-900 p-8 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-ven-yellow/30 transition-all relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-ven-yellow/5 rounded-full -mr-10 -mt-10 group-hover:bg-ven-yellow/10 transition-colors"></div>
                         <div className="relative z-10">
@@ -492,8 +443,6 @@ const Statistics: React.FC = () => {
                             <span className="inline-flex items-center font-bold text-orange-500 text-sm">Ver Indicadores <ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform"/></span>
                         </div>
                     </Link>
-
-                    {/* Tarjeta Social */}
                     <Link to="/estadisticas/social" className="group bg-white dark:bg-slate-900 p-8 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-purple-500/30 transition-all relative overflow-hidden">
                          <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full -mr-10 -mt-10 group-hover:bg-purple-500/10 transition-colors"></div>
                         <div className="relative z-10">
@@ -506,29 +455,15 @@ const Statistics: React.FC = () => {
                         </div>
                     </Link>
                 </div>
-                
-                {/* Banner de Data Historica */}
-                <div className="max-w-5xl mx-auto mt-16 bg-gradient-to-r from-[#001a33] to-ven-blue rounded-2xl p-8 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-pattern opacity-10"></div>
-                    <div className="relative z-10">
-                        <h3 className="text-2xl font-bold mb-2">Base de Datos Histórica (1998-2025)</h3>
-                        <p className="text-blue-200">Acceda a series de tiempo completas en formato Excel/CSV para investigación académica.</p>
-                    </div>
-                    <button className="relative z-10 bg-ven-yellow text-ven-dark px-6 py-3 rounded-xl font-bold hover:bg-white transition-colors flex items-center gap-2 flex-shrink-0">
-                        <Activity size={18} /> Solicitar Acceso
-                    </button>
-                </div>
             </div>
         </div>
     );
   }
 
-  // VISTA: DETALLE DE CATEGORÍA
   return (
     <div className="pt-28 pb-20 bg-ven-light dark:bg-slate-950 min-h-screen transition-colors duration-300">
       <div className="container mx-auto px-4">
         
-        {/* Breadcrumb / Nav */}
         <div className="mb-8 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
             <Link to="/estadisticas" className="hover:text-ven-blue dark:hover:text-ven-yellow flex items-center gap-1 transition-colors">
                 <ArrowLeft size={14} /> Centro de Estadísticas
@@ -537,7 +472,6 @@ const Statistics: React.FC = () => {
             <span className="font-bold text-ven-blue dark:text-ven-yellow">{currentCategory}</span>
         </div>
 
-        {/* Header de Categoría */}
         <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between mb-10">
             <div className="flex items-start gap-4">
                 <div className={`p-3 rounded-2xl shadow-sm ${
@@ -556,7 +490,6 @@ const Statistics: React.FC = () => {
                 </div>
             </div>
 
-            {/* Buscador Local */}
             <div className="relative w-full md:w-80 group">
                 <Search className="absolute left-3 top-3 text-gray-400 group-focus-within:text-ven-blue transition-colors w-5 h-5" />
                 <input 
@@ -569,54 +502,51 @@ const Statistics: React.FC = () => {
             </div>
         </div>
 
-        {/* Convertidor de Monedas - Solo visible en 'Monetario' */}
         {currentCategory === 'Monetario' && <CurrencyConverter />}
 
-        {/* Grid de Datos */}
         {filteredData.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-slide-up">
-                
                 {filteredData.map((item) => {
-                    // RENDERIZADO: Tarjetas Pequeñas (KPIs)
                     if (item.type === 'card') {
                         return (
-                            <div key={item.id} className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 hover:shadow-md transition-all group">
-                                <div className="flex justify-between items-start mb-4">
-                                    <div>
-                                        <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">{item.category}</p>
-                                        <h3 className="text-lg font-bold text-ven-dark dark:text-white leading-tight">{item.title}</h3>
+                            <div key={item.id} className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 hover:border-ven-blue/20 dark:hover:border-ven-yellow/20 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col justify-between">
+                                <div className="space-y-4">
+                                    <div className="flex justify-between items-start">
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1">{item.category}</span>
+                                            <h3 className="text-base font-bold text-gray-700 dark:text-gray-200 leading-snug group-hover:text-ven-blue dark:group-hover:text-ven-yellow transition-colors">{item.title}</h3>
+                                        </div>
+                                        <div className="text-gray-200 dark:text-gray-700">
+                                            <BarChart3 size={20}/>
+                                        </div>
                                     </div>
-                                    {/* Icono pequeño decorativo */}
-                                    <div className="text-gray-300 dark:text-gray-600">
-                                        <BarChart3 size={16}/>
+                                    
+                                    <div className="flex flex-col">
+                                        <div className="flex items-baseline gap-1.5">
+                                            <span className="text-4xl font-black text-ven-dark dark:text-white tracking-tighter">
+                                                {typeof item.value === 'number' ? formatNumber(item.value, item.unit === 'VES' ? 2 : item.unit === '%' ? 1 : 0) : item.value}
+                                            </span>
+                                            <span className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase">{item.unit}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                
-                                <div className="flex items-end gap-2 mb-2">
-                                    <span className="text-3xl font-extrabold text-gray-800 dark:text-gray-100">
-                                        {typeof item.value === 'number' ? formatNumber(item.value, item.unit === 'VES' ? 2 : item.unit === '%' ? 1 : 0) : item.value}
-                                    </span>
-                                    <span className="text-sm font-bold text-gray-400 mb-1">{item.unit}</span>
                                 </div>
 
-                                <div className="flex items-center justify-between border-t border-gray-100 dark:border-slate-800 pt-3 mt-2">
-                                    <span className={`text-xs font-bold px-2 py-0.5 rounded flex items-center ${
-                                        item.trend > 0 ? 'bg-red-50 text-ven-red dark:bg-red-900/20' : 
-                                        item.trend < 0 ? 'bg-green-50 text-green-600 dark:bg-green-900/20' : 
-                                        'bg-gray-100 text-gray-500 dark:bg-slate-800'
+                                <div className="mt-6 pt-4 border-t border-gray-50 dark:border-slate-800/50 flex items-center justify-between">
+                                    <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black shadow-sm ${
+                                        item.trend > 0 ? 'bg-red-50 text-ven-red dark:bg-red-900/30 dark:text-red-300' : 
+                                        item.trend < 0 ? 'bg-green-50 text-green-600 dark:bg-green-900/30 dark:text-green-300' : 
+                                        'bg-gray-100 text-gray-500 dark:bg-slate-800 dark:text-gray-400'
                                     }`}>
-                                        {item.trend > 0 ? <TrendingUp size={12} className="mr-1"/> : 
-                                         item.trend < 0 ? <TrendingDown size={12} className="mr-1"/> : 
-                                         <Minus size={12} className="mr-1"/>}
+                                        {item.trend > 0 ? <TrendingUp size={14}/> : 
+                                         item.trend < 0 ? <TrendingDown size={14}/> : 
+                                         <Minus size={14}/>}
                                         {Math.abs(item.trend)}%
-                                    </span>
-                                    <span className="text-[10px] text-gray-400">vs mes anterior</span>
+                                    </div>
+                                    <span className="text-[10px] text-gray-400 dark:text-gray-500 font-bold uppercase tracking-tighter">Var. Mensual</span>
                                 </div>
                             </div>
                         );
                     } 
-                    
-                    // RENDERIZADO: Gráficos Grandes (Span 2 columnas)
                     else if (item.type === 'chart_large') {
                         return (
                             <div key={item.id} className="col-span-1 md:col-span-2 bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 transition-colors">
@@ -638,23 +568,18 @@ const Statistics: React.FC = () => {
                 })}
             </div>
         ) : (
-            // Estado Vacio
             <div className="bg-gray-50 dark:bg-slate-900/50 rounded-2xl p-12 text-center border-2 border-dashed border-gray-200 dark:border-slate-800 animate-fade-in mt-8">
                 <Search className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
                 <h3 className="text-lg font-bold text-gray-600 dark:text-gray-400">No encontramos indicadores</h3>
                 <p className="text-gray-400 dark:text-gray-500 mt-2 mb-4">
                     No hay datos que coincidan con "{searchQuery}" en esta categoría.
                 </p>
-                <button 
-                    onClick={() => setSearchQuery('')}
-                    className="text-ven-blue dark:text-ven-yellow font-bold hover:underline"
-                >
+                <button onClick={() => setSearchQuery('')} className="text-ven-blue dark:text-ven-yellow font-bold hover:underline">
                     Limpiar búsqueda
                 </button>
             </div>
         )}
         
-        {/* Nueva Tabla de Tipos de Cambio - Solo para Monetario */}
         {currentCategory === 'Monetario' && <ExchangeRatesTable />}
 
       </div>
