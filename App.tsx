@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Statistics from './pages/Statistics';
@@ -8,6 +7,7 @@ import Publications from './pages/Publications';
 import Trends from './pages/Trends';
 import BlogPage from './pages/BlogPage';
 import NewsletterPage from './pages/NewsletterPage';
+import Mission from './pages/Mission';
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/mision" element={<Mission />} />
             <Route path="/estadisticas" element={<Statistics />} />
             <Route path="/publicaciones" element={<Publications />} />
             <Route path="/tendencias" element={<Trends />} />
@@ -61,8 +62,8 @@ function App() {
                       <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-6 border-b border-gray-700 pb-2 inline-block">Institucional</h4>
                       <ul className="space-y-3 text-sm">
                           <li><a href="#" className="hover:text-ven-yellow transition-colors">Sobre Nosotros</a></li>
+                          <li><Link to="/mision" className="hover:text-ven-yellow transition-colors">Misión y Principios</Link></li>
                           <li><a href="#" className="hover:text-ven-yellow transition-colors">Consejo Directivo</a></li>
-                          <li><a href="#" className="hover:text-ven-yellow transition-colors">Metodología</a></li>
                           <li><a href="#" className="hover:text-ven-yellow transition-colors">Trabaja con nosotros</a></li>
                       </ul>
                   </div>
@@ -70,7 +71,7 @@ function App() {
                   <div>
                       <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-6 border-b border-gray-700 pb-2 inline-block">Datos y Análisis</h4>
                       <ul className="space-y-3 text-sm">
-                          <li><a href="#" className="hover:text-ven-yellow transition-colors">Macroeconomía</a></li>
+                          <li><Link to="/estadisticas" className="hover:text-ven-yellow transition-colors">Macroeconomía</Link></li>
                           <li><a href="#" className="hover:text-ven-yellow transition-colors">Sector Petrolero</a></li>
                           <li><a href="#" className="hover:text-ven-yellow transition-colors">Consumo y Precios</a></li>
                           <li><a href="#" className="hover:text-ven-yellow transition-colors">Mercado Laboral</a></li>

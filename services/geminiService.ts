@@ -1,8 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 
 const apiKey = process.env.API_KEY || '';
-// Note: In a real environment, handle the missing API key gracefully. 
-// We initialize lazily or check inside the function to prevent immediate crashes if env is missing in dev.
 
 export const getEconomicAnalysis = async (topic: string, contextData?: string): Promise<string> => {
   if (!apiKey) {
@@ -31,7 +29,7 @@ export const getEconomicAnalysis = async (topic: string, contextData?: string): 
       model: 'gemini-2.5-flash',
       contents: prompt,
       config: {
-        thinkingConfig: { thinkingBudget: 0 } // Flash doesn't support high thinking budget, keep low/zero for speed
+        thinkingConfig: { thinkingBudget: 0 } 
       }
     });
 

@@ -6,7 +6,7 @@
     <title>Observatorio de Economía de Venezuela</title>
     <meta name="description" content="Plataforma integral de análisis, estadísticas y tendencias económicas de Venezuela, impulsada por IA.">
     
-    <!-- Tailwind CSS (CDN for development/flexibility, though production build usually extracts css) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Fonts -->
@@ -71,6 +71,30 @@
         height: 4px;
         width: 100%;
       }
+      
+      /* Estilos para el contenido Markdown de la IA */
+      .markdown-content h1, .markdown-content h2, .markdown-content h3 {
+        font-weight: 700;
+        color: #001a5c;
+        margin-top: 1em;
+        margin-bottom: 0.5em;
+      }
+      .markdown-content p {
+        margin-bottom: 0.8em;
+        line-height: 1.6;
+      }
+      .markdown-content ul {
+        list-style-type: disc;
+        padding-left: 1.5em;
+        margin-bottom: 1em;
+      }
+      .markdown-content li {
+        margin-bottom: 0.3em;
+      }
+      .markdown-content strong {
+        color: #00247D;
+        font-weight: 600;
+      }
     </style>
   <script type="importmap">
 {
@@ -91,7 +115,6 @@
 </head>
   <body>
     <div id="root"></div>
-    <!-- CRITICAL: Entry point for Vite to load the React app -->
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>

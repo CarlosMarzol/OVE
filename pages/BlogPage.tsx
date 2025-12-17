@@ -1,6 +1,5 @@
-
 import React from 'react';
-import BlogSection from '../components/BlogSection'; // Reutilizamos el componente de la sección
+import BlogSection from '../components/BlogSection'; 
 
 const BlogPage: React.FC = () => {
   return (

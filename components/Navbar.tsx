@@ -1,16 +1,23 @@
-
 import React, { useState, useEffect } from 'react';
 import { NavItem } from '../types';
 import { Menu, X, ChevronDown, Search } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const navItems: NavItem[] = [
-  { label: 'Observatorio', href: '/' },
+  { 
+    label: 'Observatorio', 
+    href: '/',
+    hasDropdown: true,
+    dropdownItems: [
+        { label: 'Inicio', href: '/' },
+        { label: 'Misión y Metodología', href: '/mision' }
+    ]
+  },
   { label: 'Estadísticas', href: '/estadisticas' },
   { 
     label: 'Publicaciones', 
     href: '/publicaciones', 
-    hasDropdown: false, // Simplificado para este ejemplo
+    hasDropdown: false, 
   },
   { label: 'Tendencias', href: '/tendencias' },
   { label: 'Blog', href: '/blog' },

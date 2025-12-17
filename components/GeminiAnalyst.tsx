@@ -36,13 +36,13 @@ const GeminiAnalyst: React.FC = () => {
             <BrainCircuit className="text-ven-blue w-6 h-6" />
           </div>
           <div>
-              <h2 className="text-xl md:text-2xl font-bold text-gray-800 leading-tight">Analista Económico <span className="text-ven-blue">IA</span></h2>
-              <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">Potenciado por Gemini 2.5</p>
+              <h2 className="text-xl md:text-2xl font-bold text-gray-800 leading-tight">Inteligencia de Mercados</h2>
+              <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">Análisis Computacional Avanzado</p>
           </div>
         </div>
         
         <p className="text-gray-600 mb-6 text-sm leading-relaxed">
-          Seleccione un indicador y obtenga un resumen ejecutivo instantáneo generado por inteligencia artificial sobre la economía venezolana.
+          Nuestros algoritmos sintetizan múltiples vectores macroeconómicos para ofrecer una interpretación objetiva, técnica y libre de sesgos sobre la coyuntura actual.
         </p>
 
         <div className="space-y-4 mb-6">
@@ -67,20 +67,21 @@ const GeminiAnalyst: React.FC = () => {
               ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-ven-blue to-ven-dark hover:shadow-ven-blue/30 hover:-translate-y-0.5'}`}
           >
             {loading ? <Loader2 className="animate-spin w-5 h-5" /> : <Sparkles className="w-5 h-5 text-ven-yellow" />}
-            {loading ? 'Procesando Datos...' : 'Generar Análisis Inteligente'}
+            {loading ? 'Procesando Datos...' : 'Generar Informe Técnico'}
           </button>
         </div>
 
         {analysis && (
           <div className="bg-ven-light rounded-xl p-6 border border-ven-blue/10 animate-fade-in relative">
             <div className="absolute top-0 left-0 w-1 h-full bg-ven-yellow rounded-l-xl"></div>
-            <div className="prose prose-slate prose-sm max-w-none text-gray-700">
+            {/* Se usa la clase markdown-content definida en index.html */}
+            <div className="markdown-content text-sm text-gray-700">
                 <ReactMarkdown components={{
                     strong: ({node, ...props}) => <span className="font-bold text-ven-blue" {...props} />
                 }}>{analysis}</ReactMarkdown>
             </div>
             <div className="mt-4 pt-4 border-t border-gray-200 text-[10px] text-gray-400 flex justify-between items-center uppercase tracking-wider">
-                <span className="flex items-center gap-1"><Sparkles size={10} /> Análisis Automático</span>
+                <span className="flex items-center gap-1"><Sparkles size={10} /> Reporte Sintético</span>
                 <span>{new Date().toLocaleDateString()}</span>
             </div>
           </div>
@@ -89,7 +90,7 @@ const GeminiAnalyst: React.FC = () => {
         {!hasGenerated && !loading && (
              <div className="bg-gray-50 border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center text-center text-gray-400 min-h-[160px]">
                 <BookOpen className="w-10 h-10 mb-3 opacity-20" />
-                <p className="text-sm">Esperando solicitud...</p>
+                <p className="text-sm">Seleccione variable para iniciar proyección.</p>
              </div>
         )}
       </div>

@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { TrendingUp, DollarSign, ShoppingBasket, ArrowUpRight, BarChart3, PieChart } from 'lucide-react';
+import { TrendingUp, DollarSign, ShoppingBasket, ArrowUpRight, BarChart3, PieChart, Quote } from 'lucide-react';
 import GeminiAnalyst from '../components/GeminiAnalyst';
 import { InflationChart, ExchangeChart } from '../components/Charts';
 import BlogSection from '../components/BlogSection';
@@ -11,8 +10,8 @@ import { Link } from 'react-router-dom';
 const Home: React.FC = () => {
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative bg-white pt-40 pb-20 overflow-hidden">
+      {/* Hero Section - Reduced padding top for better visual balance */}
+      <section className="relative bg-white pt-28 pb-20 overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03] z-0" style={{ backgroundImage: 'radial-gradient(#00247D 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -32,6 +31,15 @@ const Home: React.FC = () => {
                         </span>
                         <span className="block mt-2 text-3xl md:text-4xl lg:text-5xl text-gray-500 font-bold">en tiempo real.</span>
                     </h1>
+                    
+                    {/* Philosophical Quote */}
+                    <div className="my-8 relative pl-6 border-l-4 border-ven-yellow bg-gray-50/50 p-4 rounded-r-lg max-w-lg">
+                      <Quote className="absolute top-2 left-2 w-4 h-4 text-ven-yellow opacity-40 transform -scale-x-100 -translate-x-full" />
+                      <p className="text-lg md:text-xl text-gray-700 italic font-serif leading-relaxed">
+                        "Sin instituciones estadísticas sólidas, la confianza en los datos se desploma — y con ella, los cimientos de una política sólida."
+                      </p>
+                    </div>
+
                     <p className="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg">
                         Plataforma integral de inteligencia económica. Monitoreamos indicadores, proyectamos tendencias y democratizamos el acceso a la información financiera del país.
                     </p>
@@ -39,7 +47,7 @@ const Home: React.FC = () => {
                         <Link to="/estadisticas" className="bg-ven-blue text-white px-8 py-3.5 rounded-lg font-bold hover:bg-ven-dark transition-all shadow-xl shadow-ven-blue/20 transform hover:-translate-y-1">
                             Ver Indicadores de Hoy
                         </Link>
-                        <Link to="/publicaciones" className="bg-white text-ven-dark border-2 border-ven-dark/10 px-8 py-3.5 rounded-lg font-bold hover:bg-gray-50 transition-colors">
+                        <Link to="/mision" className="bg-white text-ven-dark border-2 border-ven-dark/10 px-8 py-3.5 rounded-lg font-bold hover:bg-gray-50 transition-colors">
                             Nuestra Metodología
                         </Link>
                     </div>

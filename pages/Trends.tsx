@@ -1,11 +1,10 @@
-
 import React from 'react';
 import GeminiAnalyst from '../components/GeminiAnalyst';
 import { LineChart, Zap } from 'lucide-react';
 
 const Trends: React.FC = () => {
   return (
-    <div className="pt-32 pb-20 bg-ven-light min-h-screen">
+    <div className="pt-28 pb-20 bg-ven-light min-h-screen">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="inline-block py-1 px-3 rounded-full bg-ven-yellow/10 text-ven-dark text-xs font-bold uppercase tracking-widest mb-4">
