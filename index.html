@@ -14,6 +14,7 @@
     
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             fontFamily: {
@@ -32,6 +33,7 @@
             animation: {
               'fade-in': 'fadeIn 0.6s ease-out forwards',
               'slide-up': 'slideUp 0.8s ease-out forwards',
+              'marquee': 'marquee 45s linear infinite',
             },
             keyframes: {
               fadeIn: {
@@ -41,6 +43,10 @@
               slideUp: {
                 '0%': { transform: 'translateY(20px)', opacity: '0' },
                 '100%': { transform: 'translateY(0)', opacity: '1' },
+              },
+              marquee: {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-100%)' },
               }
             }
           }
@@ -51,6 +57,10 @@
       body {
         font-family: 'Inter', sans-serif;
         background-color: #f8fafc;
+        transition: background-color 0.3s ease;
+      }
+      .dark body {
+        background-color: #020617; /* slate-950 */
       }
       /* Custom scrollbar for better aesthetics */
       ::-webkit-scrollbar {
@@ -59,12 +69,21 @@
       ::-webkit-scrollbar-track {
         background: #f1f1f1;
       }
+      .dark ::-webkit-scrollbar-track {
+        background: #0f172a;
+      }
       ::-webkit-scrollbar-thumb {
         background: #94a3b8;
         border-radius: 4px;
       }
+      .dark ::-webkit-scrollbar-thumb {
+        background: #334155;
+      }
       ::-webkit-scrollbar-thumb:hover {
         background: #00247D;
+      }
+      .dark ::-webkit-scrollbar-thumb:hover {
+        background: #F7C600;
       }
       .tricolor-border-top {
         background: linear-gradient(90deg, #F7C600 33.33%, #00247D 33.33%, #00247D 66.66%, #CF142B 66.66%);
@@ -78,6 +97,9 @@
         color: #001a5c;
         margin-top: 1em;
         margin-bottom: 0.5em;
+      }
+      .dark .markdown-content h1, .dark .markdown-content h2, .dark .markdown-content h3 {
+        color: #e2e8f0;
       }
       .markdown-content p {
         margin-bottom: 0.8em;
@@ -94,6 +116,9 @@
       .markdown-content strong {
         color: #00247D;
         font-weight: 600;
+      }
+      .dark .markdown-content strong {
+        color: #60a5fa;
       }
     </style>
   <script type="importmap">

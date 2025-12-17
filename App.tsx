@@ -12,7 +12,9 @@ import Mission from './pages/Mission';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-ven-light font-sans text-gray-900 flex flex-col">
+      <div className="min-h-screen bg-ven-light dark:bg-slate-950 font-sans text-gray-900 dark:text-gray-100 flex flex-col transition-colors duration-300">
+        
+        {/* Navbar */}
         <Navbar />
         
         <main className="flex-grow">
@@ -28,7 +30,7 @@ function App() {
         </main>
 
         {/* Footer */}
-        <footer className="bg-[#001a33] text-gray-400 py-16 border-t border-ven-blue/30 relative overflow-hidden mt-auto">
+        <footer className="bg-[#001a33] dark:bg-slate-950 text-gray-400 py-16 border-t border-ven-blue/30 dark:border-slate-800 relative overflow-hidden mt-auto">
           <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-ven-yellow via-ven-blue to-ven-red"></div>
           
           <div className="container mx-auto px-4">

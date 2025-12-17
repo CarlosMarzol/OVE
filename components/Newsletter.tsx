@@ -1,14 +1,33 @@
 import React, { useState } from 'react';
-import { Mail, CheckCircle, Bell, ShieldCheck } from 'lucide-react';
+import { Mail, CheckCircle, Bell, ShieldCheck, Loader2, AlertCircle } from 'lucide-react';
+import { subscribeEmail } from '../services/subscriptionService';
 
 const Newsletter: React.FC = () => {
   const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setSubscribed(true);
+    
+    if (!email) return;
+
+    setStatus('loading');
+    setMessage('');
+
+    try {
+      const response = await subscribeEmail(email);
+      
+      if (response.success) {
+        setStatus('success');
+        setEmail(''); // Limpiar campo
+      } else {
+        setStatus('error');
+        setMessage(response.message);
+      }
+    } catch (error) {
+      setStatus('error');
+      setMessage("Ocurrió un error inesperado. Intente nuevamente.");
     }
   };
 
@@ -45,37 +64,64 @@ const Newsletter: React.FC = () => {
                 </div>
 
                 <div className="w-full lg:w-[420px]">
-                    {subscribed ? (
+                    {status === 'success' ? (
                     <div className="bg-white text-ven-dark p-8 rounded-2xl text-center shadow-xl animate-fade-in border-b-4 border-ven-yellow">
                         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <CheckCircle className="w-8 h-8 text-green-600" />
                         </div>
                         <h3 className="text-2xl font-bold mb-2">¡Suscripción confirmada!</h3>
-                        <p className="text-gray-600 text-sm">Bienvenido al Observatorio. Revisa tu bandeja de entrada.</p>
+                        <p className="text-gray-600 text-sm mb-4">Bienvenido al Observatorio. Tus datos han sido registrados correctamente.</p>
+                        <button 
+                          onClick={() => setStatus('idle')}
+                          className="text-sm text-ven-blue font-bold hover:underline"
+                        >
+                          Suscribir otro correo
+                        </button>
                     </div>
                     ) : (
-                    <div className="bg-white/10 border border-white/10 p-6 rounded-2xl shadow-inner">
-                        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                    <div className="bg-white/10 border border-white/10 p-6 rounded-2xl shadow-inner relative overflow-hidden">
+                        {status === 'loading' && (
+                          <div className="absolute inset-0 bg-ven-dark/50 backdrop-blur-sm z-20 flex items-center justify-center rounded-2xl">
+                             <Loader2 className="w-10 h-10 text-ven-yellow animate-spin" />
+                          </div>
+                        )}
+                        
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-4 relative z-10">
                             <div>
                                 <label htmlFor="email" className="text-xs font-bold text-gray-300 uppercase tracking-wider ml-1 mb-2 block">Correo Institucional o Personal</label>
                                 <div className="relative">
-                                    <Mail className="absolute left-4 top-4 text-gray-400 w-5 h-5" />
+                                    <Mail className={`absolute left-4 top-4 w-5 h-5 ${status === 'error' ? 'text-red-400' : 'text-gray-400'}`} />
                                     <input
                                     id="email"
                                     type="email"
+                                    name="email" 
                                     placeholder="nombre@ejemplo.com"
                                     value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full pl-12 pr-5 py-4 rounded-xl bg-gray-900/60 border border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-ven-yellow focus:border-transparent transition-all"
+                                    onChange={(e) => {
+                                      setEmail(e.target.value);
+                                      if (status === 'error') setStatus('idle');
+                                    }}
+                                    disabled={status === 'loading'}
+                                    className={`w-full pl-12 pr-5 py-4 rounded-xl bg-gray-900/60 border text-white placeholder-gray-500 focus:outline-none focus:ring-2 transition-all
+                                      ${status === 'error' 
+                                        ? 'border-red-500 focus:ring-red-500' 
+                                        : 'border-gray-600 focus:ring-ven-yellow focus:border-transparent'}`}
                                     required
                                     />
                                 </div>
+                                {status === 'error' && (
+                                  <div className="flex items-center gap-1 mt-2 text-red-300 text-xs font-medium animate-fade-in">
+                                    <AlertCircle size={12} />
+                                    <span>{message}</span>
+                                  </div>
+                                )}
                             </div>
                             <button
                             type="submit"
-                            className="w-full bg-gradient-to-r from-ven-red to-[#b00e21] hover:from-[#b00e21] hover:to-[#900010] text-white font-bold py-4 rounded-xl shadow-lg shadow-ven-red/30 transform hover:-translate-y-0.5 transition-all duration-200"
+                            disabled={status === 'loading'}
+                            className="w-full bg-gradient-to-r from-ven-red to-[#b00e21] hover:from-[#b00e21] hover:to-[#900010] text-white font-bold py-4 rounded-xl shadow-lg shadow-ven-red/30 transform hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
                             >
-                            Suscribirse Gratis
+                            {status === 'loading' ? 'Procesando...' : 'Suscribirse Gratis'}
                             </button>
                             <p className="text-[10px] text-center text-gray-400 mt-2">
                                 Respetamos su privacidad. Cancele su suscripción en cualquier momento.

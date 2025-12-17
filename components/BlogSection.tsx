@@ -32,17 +32,17 @@ const posts: BlogPost[] = [
 
 const BlogSection: React.FC = () => {
   return (
-    <section className="py-20 bg-white" id="blog">
+    <section className="py-20 bg-white dark:bg-slate-950 transition-colors duration-300" id="blog">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
           <div>
             <span className="text-ven-red font-bold text-sm tracking-wider uppercase mb-2 block">Actualidad Económica</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-ven-dark">Estudios y Publicaciones</h2>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-ven-dark dark:text-white">Estudios y Publicaciones</h2>
             <div className="h-1.5 w-24 bg-ven-yellow mt-4 rounded-full"></div>
           </div>
-          <Link to="/publicaciones" className="hidden md:flex items-center text-ven-blue font-bold hover:text-ven-red transition-colors group">
+          <Link to="/publicaciones" className="hidden md:flex items-center text-ven-blue dark:text-ven-yellow font-bold hover:text-ven-red transition-colors group">
             Ver todas las publicaciones 
-            <span className="ml-2 bg-ven-blue/10 p-1 rounded-full group-hover:bg-ven-red/10 transition-colors">
+            <span className="ml-2 bg-ven-blue/10 dark:bg-ven-yellow/10 p-1 rounded-full group-hover:bg-ven-red/10 transition-colors">
                 <ArrowRight className="w-4 h-4" />
             </span>
           </Link>
@@ -50,7 +50,7 @@ const BlogSection: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => (
-            <article key={post.id} className="group bg-white rounded-2xl shadow-lg shadow-gray-200/50 hover:shadow-xl hover:shadow-ven-blue/10 transition-all duration-300 border border-gray-100 overflow-hidden flex flex-col h-full transform hover:-translate-y-1">
+            <article key={post.id} className="group bg-white dark:bg-slate-900 rounded-2xl shadow-lg shadow-gray-200/50 dark:shadow-none hover:shadow-xl hover:shadow-ven-blue/10 dark:hover:shadow-black/50 transition-all duration-300 border border-gray-100 dark:border-slate-800 overflow-hidden flex flex-col h-full transform hover:-translate-y-1">
               <div className="relative h-56 overflow-hidden">
                 <div className="absolute inset-0 bg-ven-blue/20 group-hover:bg-transparent transition-colors z-10"></div>
                 <img 
@@ -77,16 +77,16 @@ const BlogSection: React.FC = () => {
                   </div>
                 </div>
                 
-                <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-ven-blue transition-colors leading-tight line-clamp-2">
+                <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 group-hover:text-ven-blue dark:group-hover:text-ven-yellow transition-colors leading-tight line-clamp-2">
                   {post.title}
                 </h3>
                 
-                <p className="text-gray-600 text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
                   {post.summary}
                 </p>
                 
-                <div className="pt-5 border-t border-gray-100 mt-auto">
-                    <Link to="/blog" className="inline-flex items-center text-sm font-bold text-ven-blue group-hover:text-ven-red transition-colors">
+                <div className="pt-5 border-t border-gray-100 dark:border-slate-800 mt-auto">
+                    <Link to="/blog" className="inline-flex items-center text-sm font-bold text-ven-blue dark:text-ven-yellow group-hover:text-ven-red transition-colors">
                     Leer artículo completo <ArrowRight className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
@@ -96,7 +96,7 @@ const BlogSection: React.FC = () => {
         </div>
         
         <div className="mt-12 text-center md:hidden">
-            <Link to="/publicaciones" className="px-8 py-3 bg-white border-2 border-ven-blue text-ven-blue rounded-full font-bold hover:bg-ven-blue hover:text-white transition-all inline-block">
+            <Link to="/publicaciones" className="px-8 py-3 bg-white dark:bg-slate-800 border-2 border-ven-blue dark:border-slate-700 text-ven-blue dark:text-white rounded-full font-bold hover:bg-ven-blue hover:text-white transition-all inline-block">
                 Ver biblioteca completa
             </Link>
         </div>
