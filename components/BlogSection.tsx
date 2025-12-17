@@ -10,7 +10,8 @@ const posts: BlogPost[] = [
     summary: 'El más reciente reporte de la OCHA destaca avances en seguridad alimentaria y salud entre marzo y abril de 2025, cubriendo el 82% de los municipios del país con una inversión requerida de $606M.',
     category: 'Humanitario',
     date: '30 Abr, 2025',
-    imageUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb7d5fa5?q=80&w=2626&auto=format&fit=crop'
+    // Nueva imagen más visual (Manos ofreciendo ayuda/comunidad)
+    imageUrl: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?q=80&w=2670&auto=format&fit=crop'
   },
   {
     id: '2',
@@ -86,8 +87,12 @@ const BlogSection: React.FC = () => {
                 </p>
                 
                 <div className="pt-5 border-t border-gray-100 dark:border-slate-800 mt-auto">
-                    <Link to="/publicaciones" className="inline-flex items-center text-sm font-bold text-ven-blue dark:text-ven-yellow group-hover:text-ven-red transition-colors">
-                    Leer reporte completo <ArrowRight className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                    {/* CONDICIONAL: Si es el ID 1 (OCHA), va a la ruta específica. Si no, a general */}
+                    <Link 
+                      to={post.id === '1' ? "/blog/ocha-marzo-abril-2025" : "/publicaciones"} 
+                      className="inline-flex items-center text-sm font-bold text-ven-blue dark:text-ven-yellow group-hover:text-ven-red transition-colors"
+                    >
+                      Leer reporte completo <ArrowRight className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
               </div>

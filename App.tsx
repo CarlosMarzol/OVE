@@ -9,6 +9,7 @@ import BlogPage from './pages/BlogPage';
 import NewsletterPage from './pages/NewsletterPage';
 import Mission from './pages/Mission';
 import CookiesPolicy from './pages/CookiesPolicy';
+import OchaReportPost from './pages/posts/OchaReportPost';
 import CookieBanner from './components/CookieBanner';
 import { initializeGoogleAnalytics, trackPageView, hasAnalyticsConsent } from './services/analytics';
 
@@ -53,6 +54,7 @@ function App() {
             <Route path="/publicaciones" element={<Publications />} />
             <Route path="/tendencias" element={<Trends />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/ocha-marzo-abril-2025" element={<OchaReportPost />} />
             <Route path="/boletin" element={<NewsletterPage />} />
             <Route path="/cookies" element={<CookiesPolicy />} />
           </Routes>
