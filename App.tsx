@@ -50,7 +50,11 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/mision" element={<Mission />} />
+            
+            {/* Rutas de Estadísticas */}
             <Route path="/estadisticas" element={<Statistics />} />
+            <Route path="/estadisticas/:categorySlug" element={<Statistics />} />
+
             <Route path="/publicaciones" element={<Publications />} />
             <Route path="/tendencias" element={<Trends />} />
             <Route path="/blog" element={<BlogPage />} />
@@ -104,9 +108,9 @@ function App() {
                   <div>
                       <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-6 border-b border-gray-700 pb-2 inline-block">Datos y Análisis</h4>
                       <ul className="space-y-3 text-sm">
-                          <li><Link to="/estadisticas" className="hover:text-ven-yellow transition-colors">Macroeconomía</Link></li>
-                          <li><a href="#" className="hover:text-ven-yellow transition-colors">Sector Petrolero</a></li>
-                          <li><a href="#" className="hover:text-ven-yellow transition-colors">Consumo y Precios</a></li>
+                          <li><Link to="/estadisticas/macroeconomia" className="hover:text-ven-yellow transition-colors">Macroeconomía</Link></li>
+                          <li><a href="/estadisticas/energia" className="hover:text-ven-yellow transition-colors">Sector Petrolero</a></li>
+                          <li><a href="/estadisticas/social" className="hover:text-ven-yellow transition-colors">Consumo y Precios</a></li>
                           <li><a href="#" className="hover:text-ven-yellow transition-colors">Mercado Laboral</a></li>
                       </ul>
                   </div>

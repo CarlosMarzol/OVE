@@ -14,7 +14,18 @@ const navItems: NavItem[] = [
         { label: 'Misión y Metodología', href: '/mision' }
     ]
   },
-  { label: 'Estadísticas', href: '/estadisticas' },
+  { 
+    label: 'Estadísticas', 
+    href: '/estadisticas',
+    hasDropdown: true,
+    dropdownItems: [
+        { label: 'Panel General', href: '/estadisticas' },
+        { label: 'Macroeconomía', href: '/estadisticas/macroeconomia' },
+        { label: 'Sector Monetario', href: '/estadisticas/monetario' },
+        { label: 'Energía y Petróleo', href: '/estadisticas/energia' },
+        { label: 'Social y Consumo', href: '/estadisticas/social' }
+    ]
+  },
   { 
     label: 'Publicaciones', 
     href: '/publicaciones', 
