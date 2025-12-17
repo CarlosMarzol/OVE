@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import SEO from '../components/SEO';
 import { InflationChart, ExchangeChart } from '../components/Charts';
 import { 
   ArrowDown, 
@@ -250,7 +251,7 @@ const CurrencyConverter: React.FC = () => {
     }, [amount, fromCurrency, toCurrency, allCurrencies]);
 
     return (
-        <div className="bg-gradient-to-br from-ven-dark to-[#00247D] text-white p-6 md:p-8 rounded-2xl shadow-xl border border-ven-blue/30 relative overflow-hidden mb-8 animate-slide-up">
+        <section className="bg-gradient-to-br from-ven-dark to-[#00247D] text-white p-6 md:p-8 rounded-2xl shadow-xl border border-ven-blue/30 relative overflow-hidden mb-8 animate-slide-up">
             <div className="absolute top-0 right-0 w-64 h-64 bg-ven-blue rounded-full filter blur-3xl opacity-20 transform translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-ven-yellow rounded-full filter blur-3xl opacity-10 transform -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
 
@@ -323,13 +324,13 @@ const CurrencyConverter: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 
 const ExchangeRatesTable: React.FC = () => {
     return (
-        <div className="col-span-1 md:col-span-2 lg:col-span-4 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 overflow-hidden mt-6 animate-slide-up">
+        <section className="col-span-1 md:col-span-2 lg:col-span-4 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 overflow-hidden mt-6 animate-slide-up">
             <div className="p-6 border-b border-gray-100 dark:border-slate-800 flex justify-between items-center">
                 <div>
                     <h3 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
@@ -370,7 +371,7 @@ const ExchangeRatesTable: React.FC = () => {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </section>
     );
 };
 
@@ -398,81 +399,24 @@ const Statistics: React.FC = () => {
     });
   }, [currentCategory, searchQuery]);
 
-  if (currentCategory === 'Todos') {
-    return (
-        <div className="pt-28 pb-20 bg-ven-light dark:bg-slate-950 min-h-screen transition-colors duration-300">
-            <div className="container mx-auto px-4">
-                <div className="mb-12 text-center">
-                    <h1 className="text-4xl font-extrabold text-ven-dark dark:text-white mb-4">Centro de Estadísticas</h1>
-                    <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
-                        Explore nuestros indicadores económicos clasificados por sectores estratégicos. Seleccione un tema para acceder a la data detallada.
-                    </p>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-                    <Link to="/estadisticas/macroeconomia" className="group bg-white dark:bg-slate-900 p-8 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-ven-red/30 transition-all relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-ven-red/5 rounded-full -mr-10 -mt-10 group-hover:bg-ven-red/10 transition-colors"></div>
-                        <div className="relative z-10">
-                            <div className="bg-red-50 dark:bg-red-900/20 w-14 h-14 rounded-xl flex items-center justify-center mb-6 text-ven-red dark:text-red-400">
-                                <Activity size={32} />
-                            </div>
-                            <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-ven-red transition-colors">Macroeconomía</h3>
-                            <p className="text-gray-500 dark:text-gray-400 mb-6">PIB, Inflación, Deuda Externa y Balanza de Pagos.</p>
-                            <span className="inline-flex items-center font-bold text-ven-red text-sm">Ver Indicadores <ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform"/></span>
-                        </div>
-                    </Link>
-                    <Link to="/estadisticas/monetario" className="group bg-white dark:bg-slate-900 p-8 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-ven-blue/30 transition-all relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-ven-blue/5 rounded-full -mr-10 -mt-10 group-hover:bg-ven-blue/10 transition-colors"></div>
-                        <div className="relative z-10">
-                            <div className="bg-blue-50 dark:bg-blue-900/20 w-14 h-14 rounded-xl flex items-center justify-center mb-6 text-ven-blue dark:text-blue-400">
-                                <Landmark size={32} />
-                            </div>
-                            <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-ven-blue transition-colors">Sector Monetario</h3>
-                            <p className="text-gray-500 dark:text-gray-400 mb-6">Liquidez (M2), Reservas, Tasas de Interés y Tipo de Cambio.</p>
-                            <span className="inline-flex items-center font-bold text-ven-blue text-sm">Ver Indicadores <ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform"/></span>
-                        </div>
-                    </Link>
-                    <Link to="/estadisticas/energia" className="group bg-white dark:bg-slate-900 p-8 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-ven-yellow/30 transition-all relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-ven-yellow/5 rounded-full -mr-10 -mt-10 group-hover:bg-ven-yellow/10 transition-colors"></div>
-                        <div className="relative z-10">
-                            <div className="bg-orange-50 dark:bg-orange-900/20 w-14 h-14 rounded-xl flex items-center justify-center mb-6 text-orange-500">
-                                <Droplets size={32} />
-                            </div>
-                            <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-orange-500 transition-colors">Energía y Petróleo</h3>
-                            <p className="text-gray-500 dark:text-gray-400 mb-6">Producción petrolera, Exportaciones, Refinación y Gas.</p>
-                            <span className="inline-flex items-center font-bold text-orange-500 text-sm">Ver Indicadores <ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform"/></span>
-                        </div>
-                    </Link>
-                    <Link to="/estadisticas/social" className="group bg-white dark:bg-slate-900 p-8 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-purple-500/30 transition-all relative overflow-hidden">
-                         <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full -mr-10 -mt-10 group-hover:bg-purple-500/10 transition-colors"></div>
-                        <div className="relative z-10">
-                            <div className="bg-purple-50 dark:bg-purple-900/20 w-14 h-14 rounded-xl flex items-center justify-center mb-6 text-purple-600 dark:text-purple-400">
-                                <ShoppingCart size={32} />
-                            </div>
-                            <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-purple-600 transition-colors">Social y Consumo</h3>
-                            <p className="text-gray-500 dark:text-gray-400 mb-6">Canasta básica, Salarios, Pobreza y Ventas comerciales.</p>
-                            <span className="inline-flex items-center font-bold text-purple-600 text-sm">Ver Indicadores <ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform"/></span>
-                        </div>
-                    </Link>
-                </div>
-            </div>
-        </div>
-    );
-  }
-
   return (
     <div className="pt-28 pb-20 bg-ven-light dark:bg-slate-950 min-h-screen transition-colors duration-300">
+      <SEO 
+        title={`${currentCategory === 'Todos' ? 'Estadísticas Económicas' : currentCategory}`} 
+        description={`Consulte indicadores de ${currentCategory} en Venezuela: Inflación, PIB, Reservas, Tipo de Cambio y producción petrolera.`} 
+      />
+      
       <div className="container mx-auto px-4">
         
-        <div className="mb-8 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+        <nav className="mb-8 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400" aria-label="Breadcrumb">
             <Link to="/estadisticas" className="hover:text-ven-blue dark:hover:text-ven-yellow flex items-center gap-1 transition-colors">
                 <ArrowLeft size={14} /> Centro de Estadísticas
             </Link>
             <span className="text-gray-300">/</span>
             <span className="font-bold text-ven-blue dark:text-ven-yellow">{currentCategory}</span>
-        </div>
+        </nav>
 
-        <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between mb-10">
+        <header className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between mb-10">
             <div className="flex items-start gap-4">
                 <div className={`p-3 rounded-2xl shadow-sm ${
                     currentCategory === 'Energía' ? 'bg-orange-100 text-orange-600 dark:bg-orange-900/30' :
@@ -500,16 +444,16 @@ const Statistics: React.FC = () => {
                     className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-ven-blue dark:focus:ring-ven-yellow transition-all shadow-sm"
                 />
             </div>
-        </div>
+        </header>
 
         {currentCategory === 'Monetario' && <CurrencyConverter />}
 
         {filteredData.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-slide-up">
+            <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-slide-up">
                 {filteredData.map((item) => {
                     if (item.type === 'card') {
                         return (
-                            <div key={item.id} className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 hover:border-ven-blue/20 dark:hover:border-ven-yellow/20 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col justify-between">
+                            <article key={item.id} className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 hover:border-ven-blue/20 dark:hover:border-ven-yellow/20 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col justify-between">
                                 <div className="space-y-4">
                                     <div className="flex justify-between items-start">
                                         <div className="flex flex-col">
@@ -544,12 +488,12 @@ const Statistics: React.FC = () => {
                                     </div>
                                     <span className="text-[10px] text-gray-400 dark:text-gray-500 font-bold uppercase tracking-tighter">Var. Mensual</span>
                                 </div>
-                            </div>
+                            </article>
                         );
                     } 
                     else if (item.type === 'chart_large') {
                         return (
-                            <div key={item.id} className="col-span-1 md:col-span-2 bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 transition-colors">
+                            <section key={item.id} className="col-span-1 md:col-span-2 bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 transition-colors">
                                 <div className="flex justify-between items-center mb-6">
                                     <div>
                                         <div className="flex items-center gap-2 mb-1">
@@ -561,12 +505,12 @@ const Statistics: React.FC = () => {
                                     </div>
                                 </div>
                                 {item.component}
-                            </div>
+                            </section>
                         );
                     }
                     return null;
                 })}
-            </div>
+            </main>
         ) : (
             <div className="bg-gray-50 dark:bg-slate-900/50 rounded-2xl p-12 text-center border-2 border-dashed border-gray-200 dark:border-slate-800 animate-fade-in mt-8">
                 <Search className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />

@@ -1,5 +1,6 @@
 import React from 'react';
 import { TrendingUp, DollarSign, ShoppingBasket, ArrowUpRight, BarChart3 } from 'lucide-react';
+import SEO from '../components/SEO';
 import GeminiAnalyst from '../components/GeminiAnalyst';
 import EconomicCalendar from '../components/EconomicCalendar';
 import { InflationChart } from '../components/Charts';
@@ -11,6 +12,11 @@ import { Link } from 'react-router-dom';
 const Home: React.FC = () => {
   return (
     <>
+      <SEO 
+        title="Análisis y Estadísticas en Tiempo Real" 
+        description="El Observatorio de Economía de Venezuela (OEV) ofrece datos independientes, análisis de inflación, PIB y sector petrolero impulsados por Inteligencia Artificial."
+      />
+      
       {/* Hero Section */}
       <section className="relative bg-white dark:bg-slate-950 pt-28 pb-20 overflow-hidden transition-colors duration-300">
         <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] z-0 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#00247D 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
@@ -33,7 +39,6 @@ const Home: React.FC = () => {
                         <span className="block mt-2 text-3xl md:text-4xl lg:text-5xl text-gray-500 dark:text-gray-400 font-bold">en tiempo real.</span>
                     </h1>
                     
-                    {/* Philosophical Quote */}
                     <div className="my-8 relative pl-6 border-l-4 border-ven-yellow bg-gray-50/50 dark:bg-slate-900/50 p-4 rounded-r-lg max-w-lg">
                       <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 italic font-serif leading-relaxed">
                         "Sin instituciones estadísticas sólidas, la confianza en los datos se desploma — y con ella, los cimientos de una política sólida."

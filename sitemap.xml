@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://oev.org.ve/</loc>
+    <lastmod>2025-05-18</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://oev.org.ve/#/estadisticas</loc>
+    <lastmod>2025-05-18</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oev.org.ve/#/publicaciones</loc>
+    <lastmod>2025-05-18</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oev.org.ve/#/mision</loc>
+    <priority>0.5</priority>
+  </url>
+</urlset>
