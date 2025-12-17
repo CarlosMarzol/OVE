@@ -1,5 +1,5 @@
-import React from 'react';
-import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Statistics from './pages/Statistics';
@@ -8,15 +8,43 @@ import Trends from './pages/Trends';
 import BlogPage from './pages/BlogPage';
 import NewsletterPage from './pages/NewsletterPage';
 import Mission from './pages/Mission';
+import CookiesPolicy from './pages/CookiesPolicy';
+import CookieBanner from './components/CookieBanner';
+import { initializeGoogleAnalytics, trackPageView, hasAnalyticsConsent } from './services/analytics';
+
+// Componente auxiliar para rastrear cambios de ruta
+const AnalyticsTracker = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Usar la nueva función helper para verificar consentimiento específico
+    if (hasAnalyticsConsent()) {
+      // Si el script no está cargado (por ejemplo, recarga de página), cargarlo
+      if (typeof window.gtag === 'undefined') {
+        initializeGoogleAnalytics();
+      }
+      // Rastrear la vista de página
+      trackPageView(location.pathname + location.search);
+    }
+  }, [location]);
+
+  return null;
+};
 
 function App() {
   return (
     <Router>
       <div className="min-h-screen bg-ven-light dark:bg-slate-950 font-sans text-gray-900 dark:text-gray-100 flex flex-col transition-colors duration-300">
         
+        {/* Tracker invisible que escucha cambios de URL */}
+        <AnalyticsTracker />
+        
         {/* Navbar */}
         <Navbar />
         
+        {/* Banner de Cookies Global */}
+        <CookieBanner />
+
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -26,6 +54,7 @@ function App() {
             <Route path="/tendencias" element={<Trends />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/boletin" element={<NewsletterPage />} />
+            <Route path="/cookies" element={<CookiesPolicy />} />
           </Routes>
         </main>
 
@@ -93,7 +122,7 @@ function App() {
                   <div className="flex gap-6 mt-4 md:mt-0">
                       <a href="#" className="hover:text-white transition-colors">Privacidad</a>
                       <a href="#" className="hover:text-white transition-colors">Términos</a>
-                      <a href="#" className="hover:text-white transition-colors">Cookies</a>
+                      <Link to="/cookies" className="hover:text-white transition-colors">Cookies</Link>
                   </div>
               </div>
           </div>

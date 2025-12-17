@@ -6,27 +6,27 @@ import { Link } from 'react-router-dom';
 const posts: BlogPost[] = [
   {
     id: '1',
-    title: 'Recuperación del sector comercio en el segundo trimestre: Mitos y Realidades',
-    summary: 'Un análisis detallado sobre el repunte en ventas minoristas en las principales ciudades del país contrastado con la capacidad de compra real.',
+    title: 'OCHA: 1.1 millones de personas atendidas en respuesta humanitaria',
+    summary: 'El más reciente reporte de la OCHA destaca avances en seguridad alimentaria y salud entre marzo y abril de 2025, cubriendo el 82% de los municipios del país con una inversión requerida de $606M.',
+    category: 'Humanitario',
+    date: '30 Abr, 2025',
+    imageUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb7d5fa5?q=80&w=2626&auto=format&fit=crop'
+  },
+  {
+    id: '2',
+    title: 'Recuperación del sector comercio: Mitos y Realidades',
+    summary: 'Un análisis detallado sobre el repunte en ventas minoristas en las principales ciudades del país contrastado con la capacidad de compra real del ciudadano promedio.',
     category: 'Análisis',
     date: '12 Oct, 2023',
     imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop'
   },
   {
-    id: '2',
+    id: '3',
     title: 'Informe Mensual: Evolución del Índice de Precios',
-    summary: 'Los precios de los alimentos mostraron una variación del 3.2% respecto al mes anterior, impactando principalmente en proteínas y vegetales.',
+    summary: 'Los precios de los alimentos mostraron una variación del 3.2% respecto al mes anterior, impactando principalmente en proteínas y vegetales según el último boletín.',
     category: 'Estadísticas',
     date: '10 Oct, 2023',
     imageUrl: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2670&auto=format&fit=crop'
-  },
-  {
-    id: '3',
-    title: 'Alianzas Estratégicas para el Agro Venezolano',
-    summary: 'El observatorio firma convenio con asociaciones de productores para digitalizar la data rural y mejorar la toma de decisiones en el campo.',
-    category: 'Proyectos',
-    date: '05 Oct, 2023',
-    imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2832&auto=format&fit=crop'
   }
 ];
 
@@ -86,8 +86,8 @@ const BlogSection: React.FC = () => {
                 </p>
                 
                 <div className="pt-5 border-t border-gray-100 dark:border-slate-800 mt-auto">
-                    <Link to="/blog" className="inline-flex items-center text-sm font-bold text-ven-blue dark:text-ven-yellow group-hover:text-ven-red transition-colors">
-                    Leer artículo completo <ArrowRight className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                    <Link to="/publicaciones" className="inline-flex items-center text-sm font-bold text-ven-blue dark:text-ven-yellow group-hover:text-ven-red transition-colors">
+                    Leer reporte completo <ArrowRight className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
               </div>

@@ -1,25 +1,92 @@
 import React, { useState, useMemo } from 'react';
-import { FileText, Download, Filter, Search, X } from 'lucide-react';
+import { FileText, Download, Filter, Search, X, Globe, Building2, ExternalLink } from 'lucide-react';
 
+// DEFINICIÓN DE TIPO
 interface Doc {
   title: string;
+  organization: string;
   type: string;
   date: string;
-  size: string;
+  size: string; // Ej: "2.5 MB" o "PDF" si es enlace externo
   category: string;
+  fileUrl: string;
+  isExternal?: boolean; // True para Google Drive o webs externas
 }
 
+// -------------------------------------------------------------------------------------------
+// 📂 INSTRUCCIONES PARA GOOGLE DRIVE:
+// 
+// 1. Sube tu archivo a Google Drive.
+// 2. Click derecho -> Compartir -> "Cualquier persona con el enlace".
+// 3. Copia el enlace y pégalo en 'fileUrl'.
+// 4. Pon 'isExternal: true'.
+// -------------------------------------------------------------------------------------------
+
 const docsData: Doc[] = [
-  { title: "Informe de Coyuntura Económica - Q3 2023", type: "Informe Trimestral", date: "Oct 15, 2023", size: "2.4 MB", category: "Informes" },
-  { title: "La Industria Petrolera y su impacto en el PIB 2024", type: "Estudio Especial", date: "Sep 28, 2023", size: "1.8 MB", category: "Estudios" },
-  { title: "Evolución del Poder Adquisitivo en el Sector Privado", type: "Dossier", date: "Sep 10, 2023", size: "3.1 MB", category: "Dossiers" },
-  { title: "Boletín Estadístico Semanal #45", type: "Boletín", date: "Ago 30, 2023", size: "0.5 MB", category: "Boletines" },
-  { title: "Proyecciones de Inflación: Cierre de Año", type: "Pronóstico", date: "Ago 15, 2023", size: "1.2 MB", category: "Informes" },
-  { title: "Comercio Exterior: Balanza Comercial Primer Semestre", type: "Informe", date: "Jul 22, 2023", size: "4.0 MB", category: "Informes" },
-  { title: "Impacto del Sector Agroindustrial en Región Central", type: "Estudio Regional", date: "Jul 05, 2023", size: "2.1 MB", category: "Estudios" },
+  { 
+    title: "Reporte de Situación Venezuela – Marzo y Abril 2025", 
+    organization: "OCHA",
+    type: "Reporte Humanitario", 
+    date: "Abr 30, 2025", 
+    size: "Ver PDF", 
+    category: "Organismos Internacionales",
+    fileUrl: "https://drive.google.com/file/d/1J0yEiXkbas7ulrcPfb5KMSlsQ81osKEx/view?usp=sharing", 
+    isExternal: true
+  },
+  { 
+    title: "Informe Económico Regional (Ejemplo Google Drive)", 
+    organization: "FMI",
+    type: "Informe Global", 
+    date: "Oct 2023", 
+    size: "Ver PDF", 
+    category: "Organismos Internacionales",
+    // EJEMPLO: Así se ve un link de Google Drive
+    fileUrl: "https://drive.google.com/file/d/123456789_ID_DEL_ARCHIVO/view?usp=sharing", 
+    isExternal: true
+  },
+  { 
+    title: "Estudio sobre Pobreza y Equidad (Ejemplo Drive)", 
+    organization: "Banco Mundial",
+    type: "Estudio", 
+    date: "Sep 2023", 
+    size: "Ver PDF", 
+    category: "Organismos Internacionales",
+    fileUrl: "https://drive.google.com/file/d/otro_id_de_archivo/view", 
+    isExternal: true
+  },
+  { 
+    title: "Informe de Coyuntura Económica - Q3 2023", 
+    organization: "OEV",
+    type: "Informe Trimestral", 
+    date: "Oct 15, 2023", 
+    size: "2.4 MB", 
+    category: "Informes OEV",
+    fileUrl: "documentos/oev-informe-q3-2023.pdf", // Este sigue siendo un archivo local si quieres mezclarlos
+    isExternal: false
+  },
+  { 
+    title: "La Industria Petrolera y su impacto en el PIB 2024", 
+    organization: "OEV",
+    type: "Estudio Especial", 
+    date: "Sep 28, 2023", 
+    size: "1.8 MB", 
+    category: "Estudios",
+    fileUrl: "documentos/oev-industria-petrolera.pdf",
+    isExternal: false
+  },
+  { 
+    title: "Boletín Estadístico Semanal #45", 
+    organization: "OEV",
+    type: "Boletín", 
+    date: "Ago 30, 2023", 
+    size: "0.5 MB", 
+    category: "Boletines",
+    fileUrl: "documentos/boletin-45.pdf",
+    isExternal: false
+  },
 ];
 
-const categories = ["Todos", "Informes", "Estudios", "Boletines", "Dossiers"];
+const categories = ["Todos", "Informes OEV", "Organismos Internacionales", "Estudios", "Boletines"];
 
 const Publications: React.FC = () => {
   const [filter, setFilter] = useState("Todos");
@@ -28,7 +95,8 @@ const Publications: React.FC = () => {
   const filteredDocs = useMemo(() => {
     return docsData.filter(doc => {
       const matchesCategory = filter === "Todos" || doc.category === filter;
-      const matchesSearch = doc.title.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch = doc.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                            doc.organization.toLowerCase().includes(searchTerm.toLowerCase());
       return matchesCategory && matchesSearch;
     });
   }, [filter, searchTerm]);
@@ -39,7 +107,7 @@ const Publications: React.FC = () => {
         <div className="mb-10 text-center md:text-left animate-fade-in">
             <h1 className="text-4xl font-extrabold text-ven-dark dark:text-white mb-4">Biblioteca de Publicaciones</h1>
             <p className="text-gray-600 dark:text-gray-400 max-w-3xl text-lg">
-                Repositorio central de investigaciones, informes técnicos y dossiers producidos por el equipo del OEV.
+                Repositorio central de investigaciones propias y estudios de organismos multilaterales sobre la economía venezolana.
             </p>
         </div>
 
@@ -50,7 +118,7 @@ const Publications: React.FC = () => {
                 <Search className="absolute left-3 top-3.5 text-gray-400 w-5 h-5"/>
                 <input 
                     type="text" 
-                    placeholder="Buscar por título o palabra clave..." 
+                    placeholder="Buscar por título u organización..." 
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="w-full pl-10 pr-10 py-3 rounded-lg border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-ven-blue dark:focus:ring-ven-yellow focus:border-transparent transition-all shadow-sm"
@@ -97,9 +165,22 @@ const Publications: React.FC = () => {
                         
                         <div className="flex justify-between items-start mb-4">
                             <div className="p-3 bg-gray-50 dark:bg-slate-800 rounded-lg group-hover:bg-ven-blue/10 dark:group-hover:bg-ven-yellow/10 transition-colors">
-                                <FileText className="w-6 h-6 text-gray-500 dark:text-gray-400 group-hover:text-ven-blue dark:group-hover:text-ven-yellow" />
+                                {doc.category.includes('Internacionales') ? (
+                                    <Globe className="w-6 h-6 text-ven-blue dark:text-blue-400" />
+                                ) : (
+                                    <FileText className="w-6 h-6 text-gray-500 dark:text-gray-400 group-hover:text-ven-blue dark:group-hover:text-ven-yellow" />
+                                )}
                             </div>
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-slate-800 px-2 py-1 rounded">{doc.type}</span>
+                            <div className="flex flex-col items-end">
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-slate-800 px-2 py-1 rounded mb-1">
+                                    {doc.type}
+                                </span>
+                                {doc.organization !== 'OEV' && (
+                                    <span className="flex items-center gap-1 text-[10px] font-bold text-ven-blue dark:text-ven-yellow">
+                                        <Building2 size={10} /> {doc.organization}
+                                    </span>
+                                )}
+                            </div>
                         </div>
                         
                         <h3 className="font-bold text-lg text-gray-800 dark:text-gray-100 mb-3 group-hover:text-ven-blue dark:group-hover:text-ven-yellow transition-colors leading-tight flex-grow">
@@ -109,11 +190,26 @@ const Publications: React.FC = () => {
                         <div className="mt-auto">
                             <div className="flex justify-between items-center mt-4 text-xs text-gray-500 dark:text-gray-500 font-medium border-t border-gray-100 dark:border-slate-800 pt-4">
                                 <span>{doc.date}</span>
-                                <span className="flex items-center gap-1 bg-gray-50 dark:bg-slate-800 px-2 py-0.5 rounded text-gray-600 dark:text-gray-400"><Download size={12}/> {doc.size}</span>
+                                <span className="flex items-center gap-1 bg-gray-50 dark:bg-slate-800 px-2 py-0.5 rounded text-gray-600 dark:text-gray-400">
+                                    {doc.isExternal ? <ExternalLink size={10}/> : <Download size={10}/>} {doc.size}
+                                </span>
                             </div>
-                            <button className="w-full mt-4 py-2.5 border border-gray-200 dark:border-slate-700 rounded-lg text-sm font-bold text-gray-600 dark:text-gray-300 group-hover:bg-ven-blue group-hover:text-white group-hover:border-ven-blue transition-all shadow-sm">
-                                Descargar PDF
-                            </button>
+                            
+                            {/* Botón Inteligente: Detecta si es Drive/Externo o Local */}
+                            <a 
+                                href={doc.fileUrl} 
+                                download={!doc.isExternal} 
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`w-full mt-4 py-2.5 border rounded-lg text-sm font-bold transition-all shadow-sm flex items-center justify-center gap-2 group-hover:shadow-md
+                                  ${doc.isExternal 
+                                    ? 'border-ven-blue/30 text-ven-blue hover:bg-ven-blue hover:text-white' 
+                                    : 'border-gray-200 dark:border-slate-700 text-gray-600 dark:text-gray-300 hover:bg-ven-dark hover:text-white'
+                                  }`}
+                            >
+                                {doc.isExternal ? <ExternalLink size={16} /> : <Download size={16} />}
+                                {doc.isExternal ? "Ver Documento" : "Descargar PDF"}
+                            </a>
                         </div>
                     </div>
                 ))}
