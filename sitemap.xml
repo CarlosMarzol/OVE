@@ -4,19 +4,36 @@
     <loc>https://oev.org.ve/</loc>
     <lastmod>2025-05-18</lastmod>
     <priority>1.0</priority>
+    <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://oev.org.ve/#/estadisticas</loc>
     <lastmod>2025-05-18</lastmod>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://oev.org.ve/#/publicaciones</loc>
     <lastmod>2025-05-18</lastmod>
     <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://oev.org.ve/#/blog</loc>
+    <lastmod>2025-05-18</lastmod>
+    <priority>0.8</priority>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://oev.org.ve/#/tendencias</loc>
+    <lastmod>2025-05-18</lastmod>
+    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://oev.org.ve/#/mision</loc>
+    <lastmod>2025-05-18</lastmod>
     <priority>0.5</priority>
+    <changefreq>monthly</changefreq>
   </url>
 </urlset>
