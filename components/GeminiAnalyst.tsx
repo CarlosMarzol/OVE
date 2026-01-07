@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Sparkles, Loader2, BookOpen, BrainCircuit } from 'lucide-react';
 import { getEconomicAnalysis } from '../services/geminiService';
@@ -5,6 +6,7 @@ import { AnalysisTopic } from '../types';
 import ReactMarkdown from 'react-markdown';
 
 const GeminiAnalyst: React.FC = () => {
+  // Use string typed state with AnalysisTopic enum value to ensure compatibility
   const [selectedTopic, setSelectedTopic] = useState<string>(AnalysisTopic.INFLATION);
   const [analysis, setAnalysis] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -55,6 +57,7 @@ const GeminiAnalyst: React.FC = () => {
             }}
             className="w-full p-3.5 rounded-xl border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 focus:ring-2 focus:ring-ven-blue dark:focus:ring-ven-yellow focus:border-ven-blue outline-none text-gray-700 dark:text-gray-200 font-medium transition-all hover:bg-white dark:hover:bg-slate-700 cursor-pointer"
           >
+            {/* Map through AnalysisTopic enum values to populate selection options */}
             {Object.values(AnalysisTopic).map((topic) => (
               <option key={topic} value={topic}>{topic}</option>
             ))}
@@ -74,7 +77,6 @@ const GeminiAnalyst: React.FC = () => {
         {analysis && (
           <div className="bg-ven-light dark:bg-slate-800/50 rounded-xl p-6 border border-ven-blue/10 dark:border-slate-700 animate-fade-in relative">
             <div className="absolute top-0 left-0 w-1 h-full bg-ven-yellow rounded-l-xl"></div>
-            {/* Se usa la clase markdown-content definida en index.html, que ya tiene soporte para dark mode */}
             <div className="markdown-content text-sm text-gray-700 dark:text-gray-300">
                 <ReactMarkdown components={{
                     strong: ({node, ...props}) => <span className="font-bold text-ven-blue dark:text-blue-400" {...props} />

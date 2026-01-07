@@ -1,3 +1,4 @@
+
 export interface NavItem {
   label: string;
   href: string;
@@ -19,9 +20,13 @@ export interface BlogPost {
   imageUrl: string;
 }
 
+/**
+ * Enum for defining available analysis topics in the AI dashboard section.
+ * Restored after previous removal to support Gemini-powered features.
+ */
 export enum AnalysisTopic {
-  INFLATION = "Inflación y Poder Adquisitivo",
-  OIL = "Producción Petrolera y Exportaciones",
-  EXCHANGE = "Mercado Cambiario y Divisas",
-  GDP = "Producto Interno Bruto (PIB)"
+  INFLATION = 'Inflación y Precios',
+  EXCHANGE = 'Mercado Cambiario',
+  OIL = 'Producción Petrolera',
+  GROWTH = 'Crecimiento y PIB'
 }

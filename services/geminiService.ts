@@ -1,14 +1,16 @@
+
 import { GoogleGenAI } from "@google/genai";
 
-const apiKey = process.env.API_KEY || '';
-
+// Fetches an economic analysis from Gemini based on a topic and optional context data
 export const getEconomicAnalysis = async (topic: string, contextData?: string): Promise<string> => {
-  if (!apiKey) {
+  // Use the API key exclusively from environment variables as required by security guidelines
+  if (!process.env.API_KEY) {
     return "API Key no configurada. Por favor configure process.env.API_KEY para recibir análisis en tiempo real.";
   }
 
   try {
-    const ai = new GoogleGenAI({ apiKey });
+    // Correct initialization using named parameter and process.env.API_KEY directly
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     
     const prompt = `
       Actúa como un economista senior experto en la economía de Venezuela.
@@ -25,14 +27,16 @@ export const getEconomicAnalysis = async (topic: string, contextData?: string): 
       Usa formato Markdown. Máximo 250 palabras.
     `;
 
+    // Updated model to gemini-3-flash-preview for basic text analysis tasks as per guidelines
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3-flash-preview',
       contents: prompt,
       config: {
         thinkingConfig: { thinkingBudget: 0 } 
       }
     });
 
+    // Access the text property directly on the GenerateContentResponse object
     return response.text || "No se pudo generar el análisis en este momento.";
   } catch (error) {
     console.error("Error fetching Gemini analysis:", error);

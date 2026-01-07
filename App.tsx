@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Statistics from './pages/Statistics';
@@ -10,25 +10,21 @@ import NewsletterPage from './pages/NewsletterPage';
 import Mission from './pages/Mission';
 import CookiesPolicy from './pages/CookiesPolicy';
 import OchaReportPost from './pages/posts/OchaReportPost';
+import VenezuelaCruceCaminos from './pages/posts/VenezuelaCruceCaminos';
 import CookieBanner from './components/CookieBanner';
 import { initializeGoogleAnalytics, trackPageView, hasAnalyticsConsent } from './services/analytics';
+import Ticker from './components/Ticker';
 
-// Componente auxiliar para rastrear cambios de ruta
 const AnalyticsTracker = () => {
   const location = useLocation();
-
   useEffect(() => {
-    // Usar la nueva función helper para verificar consentimiento específico
     if (hasAnalyticsConsent()) {
-      // Si el script no está cargado (por ejemplo, recarga de página), cargarlo
       if (typeof window.gtag === 'undefined') {
         initializeGoogleAnalytics();
       }
-      // Rastrear la vista de página
       trackPageView(location.pathname + location.search);
     }
   }, [location]);
-
   return null;
 };
 
@@ -36,38 +32,29 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-ven-light dark:bg-slate-950 font-sans text-gray-900 dark:text-gray-100 flex flex-col transition-colors duration-300">
-        
-        {/* Tracker invisible que escucha cambios de URL */}
         <AnalyticsTracker />
-        
-        {/* Navbar */}
+        <Ticker />
         <Navbar />
-        
-        {/* Banner de Cookies Global */}
         <CookieBanner />
 
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/mision" element={<Mission />} />
-            
-            {/* Rutas de Estadísticas */}
             <Route path="/estadisticas" element={<Statistics />} />
             <Route path="/estadisticas/:categorySlug" element={<Statistics />} />
-
             <Route path="/publicaciones" element={<Publications />} />
             <Route path="/tendencias" element={<Trends />} />
             <Route path="/blog" element={<BlogPage />} />
-            <Route path="/blog/ocha-marzo-abril-2025" element={<OchaReportPost />} />
+            <Route path="/blog/ocha-report" element={<OchaReportPost />} />
+            <Route path="/blog/venezuela-cruce-caminos" element={<VenezuelaCruceCaminos />} />
             <Route path="/boletin" element={<NewsletterPage />} />
             <Route path="/cookies" element={<CookiesPolicy />} />
           </Routes>
         </main>
 
-        {/* Footer */}
         <footer className="bg-[#001a33] dark:bg-slate-950 text-gray-400 py-16 border-t border-ven-blue/30 dark:border-slate-800 relative overflow-hidden mt-auto">
           <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-ven-yellow via-ven-blue to-ven-red"></div>
-          
           <div className="container mx-auto px-4">
               <div className="grid md:grid-cols-4 gap-10 mb-12">
                   <div className="col-span-1 md:col-span-1">
@@ -88,48 +75,28 @@ function App() {
                       <p className="text-sm leading-relaxed mb-6 text-gray-300">
                           El Observatorio de Economía de Venezuela es la referencia independiente para el monitoreo, análisis y proyección de la realidad económica nacional.
                       </p>
-                      <div className="flex gap-4">
-                          <div className="w-8 h-8 rounded bg-white/5 hover:bg-ven-blue cursor-pointer transition-colors flex items-center justify-center text-white">X</div>
-                          <div className="w-8 h-8 rounded bg-white/5 hover:bg-ven-blue cursor-pointer transition-colors flex items-center justify-center text-white">in</div>
-                          <div className="w-8 h-8 rounded bg-white/5 hover:bg-ven-blue cursor-pointer transition-colors flex items-center justify-center text-white">Ig</div>
-                      </div>
                   </div>
-                  
                   <div>
                       <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-6 border-b border-gray-700 pb-2 inline-block">Institucional</h4>
                       <ul className="space-y-3 text-sm">
                           <li><a href="#" className="hover:text-ven-yellow transition-colors">Sobre Nosotros</a></li>
-                          <li><Link to="/mision" className="hover:text-ven-yellow transition-colors">Misión y Principios</Link></li>
-                          <li><a href="#" className="hover:text-ven-yellow transition-colors">Consejo Directivo</a></li>
-                          <li><a href="#" className="hover:text-ven-yellow transition-colors">Trabaja con nosotros</a></li>
+                          <li><a href="/#/mision" className="hover:text-ven-yellow transition-colors">Misión y Principios</a></li>
                       </ul>
                   </div>
-                  
                   <div>
                       <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-6 border-b border-gray-700 pb-2 inline-block">Datos y Análisis</h4>
                       <ul className="space-y-3 text-sm">
-                          <li><Link to="/estadisticas/macroeconomia" className="hover:text-ven-yellow transition-colors">Macroeconomía</Link></li>
-                          <li><a href="/estadisticas/energia" className="hover:text-ven-yellow transition-colors">Sector Petrolero</a></li>
-                          <li><a href="/estadisticas/social" className="hover:text-ven-yellow transition-colors">Consumo y Precios</a></li>
-                          <li><a href="#" className="hover:text-ven-yellow transition-colors">Mercado Laboral</a></li>
+                          <li><a href="/#/estadisticas/macroeconomia" className="hover:text-ven-yellow transition-colors">Macroeconomía</a></li>
+                          <li><a href="/#/estadisticas/energia" className="hover:text-ven-yellow transition-colors">Sector Petrolero</a></li>
                       </ul>
                   </div>
-                  
                   <div>
                       <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-6 border-b border-gray-700 pb-2 inline-block">Contacto</h4>
-                      <p className="text-sm mb-3">Torre Financiera, Piso 12<br/>Caracas, Venezuela</p>
                       <p className="text-sm mb-3 hover:text-white cursor-pointer">contacto@oev.org.ve</p>
-                      <p className="text-sm hover:text-white cursor-pointer">+58 212 555-0000</p>
                   </div>
               </div>
-              
               <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
-                  <p>&copy; 2023 Observatorio de Economía de Venezuela. Todos los derechos reservados.</p>
-                  <div className="flex gap-6 mt-4 md:mt-0">
-                      <a href="#" className="hover:text-white transition-colors">Privacidad</a>
-                      <a href="#" className="hover:text-white transition-colors">Términos</a>
-                      <Link to="/cookies" className="hover:text-white transition-colors">Cookies</Link>
-                  </div>
+                  <p>&copy; 2025 Observatorio de Economía de Venezuela. Todos los derechos reservados.</p>
               </div>
           </div>
         </footer>

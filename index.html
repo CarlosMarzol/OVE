@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Observatorio de Economía de Venezuela</title>
-    <meta name="description" content="Plataforma integral de análisis, estadísticas y tendencias económicas de Venezuela, impulsada por IA.">
+    <meta name="description" content="Plataforma de análisis técnico y estadísticas económicas de Venezuela. Inflación, PIB, Sector Petrolero y Canasta Básica con metodología independiente.">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -23,12 +23,12 @@
             },
             colors: {
               ven: {
-                yellow: '#F7C600', // Gold Yellow (Oficial Flag)
-                blue: '#00247D',   // Deep National Blue (Oficial Flag)
-                red: '#CF142B',    // National Red (Oficial Flag)
-                dark: '#001240',   // Deep Midnight Blue (Unificado con componentes)
-                light: '#f8fafc',  // Background light (Slate-50)
-                accent: '#FFD700'  // Pure Gold para acentos premium
+                yellow: '#F7C600', // Gold Yellow
+                blue: '#00247D',   // Deep National Blue
+                red: '#CF142B',    // National Red
+                dark: '#001240',   // Deep Midnight Blue
+                light: '#f8fafc',  // Background light
+                accent: '#FFD700'  
               }
             },
             animation: {
@@ -61,21 +61,15 @@
         transition: background-color 0.3s ease;
       }
       
-      /* Estilo Editorial: Títulos con Serifa */
       h1, h2, h3, h4, h5, h6 {
         font-family: 'Merriweather', serif;
-        letter-spacing: -0.02em; /* Títulos más compactos y elegantes */
+        letter-spacing: -0.02em;
       }
       
-      /* Excepción: Logos y números grandes en KPIs a veces se ven mejor en Sans */
-      .font-sans-force {
-        font-family: 'Inter', sans-serif !important;
-      }
-
       .dark body {
-        background-color: #020617; /* slate-950 */
+        background-color: #020617;
       }
-      /* Custom scrollbar for better aesthetics */
+      
       ::-webkit-scrollbar {
         width: 8px;
       }
@@ -92,47 +86,10 @@
       .dark ::-webkit-scrollbar-thumb {
         background: #334155;
       }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #00247D;
-      }
-      .dark ::-webkit-scrollbar-thumb:hover {
-        background: #F7C600;
-      }
       .tricolor-border-top {
         background: linear-gradient(90deg, #F7C600 33.33%, #00247D 33.33%, #00247D 66.66%, #CF142B 66.66%);
         height: 4px;
         width: 100%;
-      }
-      
-      /* Estilos para el contenido Markdown de la IA */
-      .markdown-content h1, .markdown-content h2, .markdown-content h3 {
-        font-weight: 700;
-        color: #001240; /* Actualizado para coincidir con ven.dark */
-        margin-top: 1em;
-        margin-bottom: 0.5em;
-        font-family: 'Merriweather', serif; /* Aplicar también al contenido generado */
-      }
-      .dark .markdown-content h1, .dark .markdown-content h2, .dark .markdown-content h3 {
-        color: #e2e8f0;
-      }
-      .markdown-content p {
-        margin-bottom: 0.8em;
-        line-height: 1.6;
-      }
-      .markdown-content ul {
-        list-style-type: disc;
-        padding-left: 1.5em;
-        margin-bottom: 1em;
-      }
-      .markdown-content li {
-        margin-bottom: 0.3em;
-      }
-      .markdown-content strong {
-        color: #00247D;
-        font-weight: 600;
-      }
-      .dark .markdown-content strong {
-        color: #60a5fa;
       }
     </style>
   <script type="importmap">

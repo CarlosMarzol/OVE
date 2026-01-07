@@ -5,29 +5,28 @@ import { Link } from 'react-router-dom';
 
 const posts: BlogPost[] = [
   {
-    id: '1',
-    title: 'OCHA: 1.1 millones de personas atendidas en respuesta humanitaria',
-    summary: 'El más reciente reporte de la OCHA destaca avances en seguridad alimentaria y salud entre marzo y abril de 2025, cubriendo el 82% de los municipios del país con una inversión requerida de $606M.',
+    id: 'venezuela-cruce-caminos',
+    title: 'Venezuela ante el cruce de caminos: lo que puede pasar (y lo que no)',
+    summary: 'Venezuela vive uno de esos momentos en los que la historia parece acelerarse, pero sin aclarar el rumbo. Análisis sobre los escenarios reales ante el reacomodo del poder.',
+    category: 'Análisis',
+    date: '18 May, 2025',
+    imageUrl: 'https://images.unsplash.com/photo-1577495508048-b635879837f1?q=80&w=2574&auto=format&fit=crop'
+  },
+  {
+    id: 'ocha-report',
+    title: 'OCHA: 1,1 millones de personas atendidas en respuesta humanitaria',
+    summary: 'El más reciente reporte de la OCHA destaca avances en seguridad alimentaria y salud entre marzo y abril de 2025, cubriendo el 82% de los municipios del país.',
     category: 'Humanitario',
     date: '30 Abr, 2025',
-    // Nueva imagen más visual (Manos ofreciendo ayuda/comunidad)
     imageUrl: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?q=80&w=2670&auto=format&fit=crop'
   },
   {
-    id: '2',
+    id: 'comercio-mitos',
     title: 'Recuperación del sector comercio: Mitos y Realidades',
     summary: 'Un análisis detallado sobre el repunte en ventas minoristas en las principales ciudades del país contrastado con la capacidad de compra real del ciudadano promedio.',
     category: 'Análisis',
     date: '12 Oct, 2023',
     imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop'
-  },
-  {
-    id: '3',
-    title: 'Informe Mensual: Evolución del Índice de Precios',
-    summary: 'Los precios de los alimentos mostraron una variación del 3.2% respecto al mes anterior, impactando principalmente en proteínas y vegetales según el último boletín.',
-    category: 'Estadísticas',
-    date: '10 Oct, 2023',
-    imageUrl: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2670&auto=format&fit=crop'
   }
 ];
 
@@ -41,7 +40,7 @@ const BlogSection: React.FC = () => {
             <h2 className="text-3xl md:text-4xl font-extrabold text-ven-dark dark:text-white">Estudios y Publicaciones</h2>
             <div className="h-1.5 w-24 bg-ven-yellow mt-4 rounded-full"></div>
           </div>
-          <Link to="/publicaciones" className="hidden md:flex items-center text-ven-blue dark:text-ven-yellow font-bold hover:text-ven-red transition-colors group">
+          <Link to="/blog" className="hidden md:flex items-center text-ven-blue dark:text-ven-yellow font-bold hover:text-ven-red transition-colors group">
             Ver todas las publicaciones 
             <span className="ml-2 bg-ven-blue/10 dark:bg-ven-yellow/10 p-1 rounded-full group-hover:bg-ven-red/10 transition-colors">
                 <ArrowRight className="w-4 h-4" />
@@ -51,7 +50,7 @@ const BlogSection: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => (
-            <article key={post.id} className="group bg-white dark:bg-slate-900 rounded-2xl shadow-lg shadow-gray-200/50 dark:shadow-none hover:shadow-xl hover:shadow-ven-blue/10 dark:hover:shadow-black/50 transition-all duration-300 border border-gray-100 dark:border-slate-800 overflow-hidden flex flex-col h-full transform hover:-translate-y-1">
+            <article key={post.id} className="group bg-white dark:bg-slate-900 rounded-2xl shadow-lg shadow-gray-200/50 dark:shadow-none hover:shadow-xl hover:shadow-ven-blue/10 transition-all duration-300 border border-gray-100 dark:border-slate-800 overflow-hidden flex flex-col h-full transform hover:-translate-y-1">
               <div className="relative h-56 overflow-hidden">
                 <div className="absolute inset-0 bg-ven-blue/20 group-hover:bg-transparent transition-colors z-10"></div>
                 <img 
@@ -87,23 +86,16 @@ const BlogSection: React.FC = () => {
                 </p>
                 
                 <div className="pt-5 border-t border-gray-100 dark:border-slate-800 mt-auto">
-                    {/* CONDICIONAL: Si es el ID 1 (OCHA), va a la ruta específica. Si no, a general */}
                     <Link 
-                      to={post.id === '1' ? "/blog/ocha-marzo-abril-2025" : "/publicaciones"} 
+                      to={`/blog/${post.id}`} 
                       className="inline-flex items-center text-sm font-bold text-ven-blue dark:text-ven-yellow group-hover:text-ven-red transition-colors"
                     >
-                      Leer reporte completo <ArrowRight className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                      Leer análisis completo <ArrowRight className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
               </div>
             </article>
           ))}
-        </div>
-        
-        <div className="mt-12 text-center md:hidden">
-            <Link to="/publicaciones" className="px-8 py-3 bg-white dark:bg-slate-800 border-2 border-ven-blue dark:border-slate-700 text-ven-blue dark:text-white rounded-full font-bold hover:bg-ven-blue hover:text-white transition-all inline-block">
-                Ver biblioteca completa
-            </Link>
         </div>
       </div>
     </section>
