@@ -7,22 +7,23 @@ interface Doc {
   organization: string;
   type: string;
   date: string;
-  size: string; // Ej: "2.5 MB" o "PDF" si es enlace externo
+  size: string; 
   category: string;
   fileUrl: string;
-  isExternal?: boolean; // True para Google Drive o webs externas
+  isExternal?: boolean; 
 }
 
-// -------------------------------------------------------------------------------------------
-// 📂 INSTRUCCIONES PARA GOOGLE DRIVE:
-// 
-// 1. Sube tu archivo a Google Drive.
-// 2. Click derecho -> Compartir -> "Cualquier persona con el enlace".
-// 3. Copia el enlace y pégalo en 'fileUrl'.
-// 4. Pon 'isExternal: true'.
-// -------------------------------------------------------------------------------------------
-
 const docsData: Doc[] = [
+  { 
+    title: "Venezuela ante el cruce de caminos: lo que puede pasar (y lo que no)", 
+    organization: "OEV",
+    type: "Análisis Político-Económico", 
+    date: "May 18, 2025", 
+    size: "Ver PDF", 
+    category: "Informes OEV",
+    fileUrl: "https://drive.google.com/file/d/1aW0KamF3ZJpmYyukehafwUNc1Er3YO99/view?usp=sharing", 
+    isExternal: true
+  },
   { 
     title: "Reporte de Situación Venezuela – Marzo y Abril 2025", 
     organization: "OCHA",
@@ -34,34 +35,13 @@ const docsData: Doc[] = [
     isExternal: true
   },
   { 
-    title: "Informe Económico Regional (Ejemplo Google Drive)", 
-    organization: "FMI",
-    type: "Informe Global", 
-    date: "Oct 2023", 
-    size: "Ver PDF", 
-    category: "Organismos Internacionales",
-    // EJEMPLO: Así se ve un link de Google Drive
-    fileUrl: "https://drive.google.com/file/d/123456789_ID_DEL_ARCHIVO/view?usp=sharing", 
-    isExternal: true
-  },
-  { 
-    title: "Estudio sobre Pobreza y Equidad (Ejemplo Drive)", 
-    organization: "Banco Mundial",
-    type: "Estudio", 
-    date: "Sep 2023", 
-    size: "Ver PDF", 
-    category: "Organismos Internacionales",
-    fileUrl: "https://drive.google.com/file/d/otro_id_de_archivo/view", 
-    isExternal: true
-  },
-  { 
     title: "Informe de Coyuntura Económica - Q3 2023", 
     organization: "OEV",
     type: "Informe Trimestral", 
     date: "Oct 15, 2023", 
     size: "2.4 MB", 
     category: "Informes OEV",
-    fileUrl: "documentos/oev-informe-q3-2023.pdf", // Este sigue siendo un archivo local si quieres mezclarlos
+    fileUrl: "documentos/oev-informe-q3-2023.pdf", 
     isExternal: false
   },
   { 
@@ -195,7 +175,6 @@ const Publications: React.FC = () => {
                                 </span>
                             </div>
                             
-                            {/* Botón Inteligente: Detecta si es Drive/Externo o Local */}
                             <a 
                                 href={doc.fileUrl} 
                                 download={!doc.isExternal} 

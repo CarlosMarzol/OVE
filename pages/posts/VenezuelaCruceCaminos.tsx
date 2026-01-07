@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Calendar, User, ArrowLeft, Bookmark, Share2, Quote, Info, ShieldAlert, GitMerge, Globe2, Landmark, Zap, MessageSquareQuote } from 'lucide-react';
+import { Calendar, User, ArrowLeft, Bookmark, Share2, Quote, Info, ShieldAlert, GitMerge, Globe2, Landmark, Zap, MessageSquareQuote, Download } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../../components/SEO';
 
 const VenezuelaCruceCaminos: React.FC = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const pdfLink = "https://drive.google.com/file/d/1aW0KamF3ZJpmYyukehafwUNc1Er3YO99/view?usp=sharing";
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -25,7 +26,7 @@ const VenezuelaCruceCaminos: React.FC = () => {
         article={true}
       />
 
-      {/* Barra de progreso de lectura - Movida al final de la pantalla para no obstruir el logo */}
+      {/* Barra de progreso de lectura - En la parte inferior para no obstruir el logo */}
       <div className="fixed bottom-0 left-0 w-full h-1.5 z-[40] bg-gray-200 dark:bg-slate-800">
         <div 
           className="h-full bg-gradient-to-r from-ven-yellow via-ven-blue to-ven-red transition-all duration-150"
@@ -191,6 +192,27 @@ const VenezuelaCruceCaminos: React.FC = () => {
                                     Seguir analizando Venezuela desde consignas ideológicas —a favor o en contra— solo prolonga la ceguera. Hoy, entender los escenarios reales no es un ejercicio académico: es una forma mínima de respeto hacia un país que lleva demasiado tiempo pagando el costo de los relatos ajenos.
                                 </p>
                             </div>
+
+                            {/* CTA Descarga PDF Destacado */}
+                            <div className="not-prose mt-12 bg-ven-blue text-white p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl relative overflow-hidden border border-white/10">
+                                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-ven-blue to-ven-dark opacity-50 z-0"></div>
+                                <div className="relative z-10">
+                                    <h3 className="text-2xl font-black mb-2 flex items-center gap-2">
+                                        <Download size={24} className="text-ven-yellow" /> Versión PDF Completa
+                                    </h3>
+                                    <p className="text-blue-100 max-w-md">
+                                        Descargue el análisis íntegro en formato editorial para su lectura offline o archivo institucional.
+                                    </p>
+                                </div>
+                                <a 
+                                    href={pdfLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="relative z-10 bg-ven-yellow text-ven-dark px-8 py-3.5 rounded-xl font-black hover:bg-white transition-all shadow-lg flex items-center gap-2 transform hover:-translate-y-1"
+                                >
+                                    Descargar Ahora
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </article>
@@ -202,8 +224,8 @@ const VenezuelaCruceCaminos: React.FC = () => {
                         <h4 className="font-black text-2xl text-ven-dark dark:text-white mb-2">Unidad de Análisis del OEV</h4>
                         <p className="text-gray-500 dark:text-gray-400 leading-relaxed">Este estudio forma parte de la serie de proyecciones sociopolíticas del Observatorio. Nuestro equipo monitorea diariamente la evolución de los indicadores económicos y políticos para ofrecer perspectivas objetivas sobre la realidad nacional.</p>
                         <div className="flex justify-center md:justify-start gap-4 mt-6">
-                            <button className="text-ven-blue dark:text-ven-yellow font-bold text-sm hover:underline">Ver otros análisis</button>
-                            <button className="text-ven-blue dark:text-ven-yellow font-bold text-sm hover:underline">Descargar en PDF</button>
+                            <Link to="/publicaciones" className="text-ven-blue dark:text-ven-yellow font-bold text-sm hover:underline">Ver otros análisis</Link>
+                            <a href={pdfLink} target="_blank" rel="noopener noreferrer" className="text-ven-blue dark:text-ven-yellow font-bold text-sm hover:underline">Descargar en PDF</a>
                         </div>
                     </div>
                 </div>
