@@ -10,7 +10,10 @@ interface SEOProps {
 const SEO: React.FC<SEOProps> = ({ title, description, image, article }) => {
   const siteName = "Observatorio de Economía de Venezuela";
   const fullTitle = `${title} | ${siteName}`;
-  const defaultImage = "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=2070&auto=format&fit=crop";
+  
+  // URL directa optimizada
+  const logoUrl = "https://lh3.googleusercontent.com/d/1xmD_TZzJLzviRzNEnKTA7_n8EADxpHPx";
+  const defaultImage = logoUrl;
 
   useEffect(() => {
     document.title = fullTitle;
@@ -36,7 +39,7 @@ const SEO: React.FC<SEOProps> = ({ title, description, image, article }) => {
     setOg('og:type', article ? 'article' : 'website');
     setOg('og:site_name', siteName);
 
-    // Schema.org JSON-LD for Search Engines
+    // Schema.org JSON-LD para que aparezca el logo en Google Search
     const schemaOrgJSONLD = {
       "@context": "http://schema.org",
       "@type": article ? "NewsArticle" : "Organization",
@@ -45,7 +48,15 @@ const SEO: React.FC<SEOProps> = ({ title, description, image, article }) => {
       "description": description,
       "image": image || defaultImage,
       "url": window.location.href,
-      "logo": "https://oev.org.ve/logo.png",
+      "logo": logoUrl,
+      "brand": {
+        "@type": "Brand",
+        "logo": logoUrl
+      },
+      "sameAs": [
+          "https://twitter.com/oev_ve",
+          "https://www.instagram.com/oev_ve"
+      ],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Caracas",
@@ -66,7 +77,7 @@ const SEO: React.FC<SEOProps> = ({ title, description, image, article }) => {
 
   }, [title, description, image, article, fullTitle]);
 
-  return null; // Este componente no renderiza nada visualmente
+  return null;
 };
 
 export default SEO;

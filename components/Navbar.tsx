@@ -40,7 +40,11 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [imageError, setImageError] = useState(false);
   const location = useLocation();
+  
+  // URL directa optimizada para evitar bloqueos de Google Drive
+  const logoUrl = "https://lh3.googleusercontent.com/d/1xmD_TZzJLzviRzNEnKTA7_n8EADxpHPx";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,25 +76,19 @@ const Navbar: React.FC = () => {
             
             {/* Logo Section */}
             <Link to="/" className="flex items-center gap-3 md:gap-4 group cursor-pointer">
-              <div className="relative w-12 h-12 md:w-14 md:h-14 flex-shrink-0 transition-transform group-hover:scale-105 duration-300">
-                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-md">
-                   {/* Yellow Top Swoosh */}
-                   <path d="M15 50 C 15 25 35 10 75 12 L 85 5 L 82 20 C 50 20 30 35 30 50 Z" fill="#F7C600"/>
-                   {/* Blue Middle Arrow/Swoosh */}
-                   <path d="M25 55 C 35 40 65 25 95 15 L 100 28 L 90 32 C 65 35 45 50 35 60 Z" fill="#00247D"/>
-                   {/* Red Bottom Swoosh */}
-                   <path d="M30 65 C 40 80 65 90 90 88 L 85 98 L 25 85 C 20 70 25 65 30 65 Z" fill="#CF142B"/>
-                   
-                   {/* Globe Container */}
-                   <circle cx="55" cy="58" r="19" fill="white"/>
-                   <circle cx="55" cy="58" r="17" fill="#00247D" stroke="white" strokeWidth="1.5"/>
-                   
-                   {/* Globe Network Lines */}
-                   <path d="M45 58 H 65 M 55 48 V 68 M 48 51 L 62 65 M 62 51 L 48 65" stroke="white" strokeWidth="0.8" opacity="0.6"/>
-                   
-                   {/* Bs Symbol */}
-                   <text x="55" y="63" fontSize="13" fontWeight="900" fill="#F7C600" textAnchor="middle" style={{fontFamily: 'Arial, sans-serif'}}>Bs</text>
-                </svg>
+              <div className="relative w-12 h-12 md:w-14 md:h-14 flex-shrink-0 transition-transform group-hover:scale-105 duration-300 flex items-center justify-center">
+                {!imageError ? (
+                  <img 
+                    src={logoUrl} 
+                    alt="Observatorio de Economía de Venezuela Logo" 
+                    className="w-full h-full object-contain"
+                    onError={() => setImageError(true)}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-ven-blue rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                    OEV
+                  </div>
+                )}
               </div>
               <div className="flex flex-col justify-center">
                 <h1 className="text-3xl md:text-4xl font-extrabold tracking-tighter leading-none text-gray-800 dark:text-gray-100 font-sans">
