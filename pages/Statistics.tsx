@@ -1,12 +1,10 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { InflationChart, ExchangeChart } from '../components/Charts';
 import { 
-  ArrowDown, 
   TrendingUp, 
   TrendingDown,
-  DollarSign, 
   Activity, 
   Search, 
   Droplets, 
@@ -15,9 +13,7 @@ import {
   BarChart3,
   Minus,
   ArrowLeft,
-  ChevronRight,
   PieChart,
-  RefreshCw,
   ArrowRightLeft,
   Calculator
 } from 'lucide-react';
@@ -73,90 +69,67 @@ interface ExchangeRate {
 }
 
 const exchangeRatesList: ExchangeRate[] = [
-    { code: 'EUR', country: 'Zona Euro', buy: 325.340685, sell: 326.156075 },
-    { code: 'CNY', country: 'China', buy: 39.182153, sell: 39.280354 },
-    { code: 'TRY', country: 'Turquia', buy: 6.459581, sell: 6.475770 },
-    { code: 'RUB', country: 'Rusia', buy: 3.467910, sell: 3.476602 },
-    { code: 'USD', country: 'E.U.A.', buy: 275.885458, sell: 276.576900 },
-    { code: 'CAD', country: 'Canada', buy: 200.687756, sell: 201.190733 },
-    { code: 'INR', country: 'India', buy: 3.035344, sell: 3.042951 },
-    { code: 'JPY', country: 'Japon', buy: 1.784050, sell: 1.788521 },
-    { code: 'ARS', country: 'Argentina', buy: 0.189873, sell: 0.190349 },
-    { code: 'BRL', country: 'Brasil', buy: 50.594263, sell: 50.721066 },
-    { code: 'CLP', country: 'Chile', buy: 0.301735, sell: 0.302491 },
-    { code: 'COP', country: 'Colombia', buy: 0.071793, sell: 0.071973 },
-    { code: 'UYU', country: 'Uruguay', buy: 7.083431, sell: 7.101184 },
-    { code: 'PEN', country: 'Perú', buy: 81.918599, sell: 82.123909 },
-    { code: 'BOB', country: 'Bolivia', buy: 40.216539, sell: 40.317332 },
-    { code: 'MXP', country: 'Mexico', buy: 15.377005, sell: 15.415544 },
-    { code: 'CUC', country: 'Cuba', buy: 275.885458, sell: 276.576900 },
-    { code: 'NIO', country: 'Nicaragua', buy: 7.585397, sell: 7.604409 },
-    { code: 'DOP', country: 'R. Dominicana', buy: 4.310037, sell: 4.320839 },
-    { code: 'TTD', country: 'Trinidad', buy: 41.041558, sell: 41.144419 },
-    { code: 'ANG', country: 'Curazao', buy: 158.182133, sell: 158.578579 },
+    { code: 'EUR', country: 'Zona Euro', buy: 48.34, sell: 48.95 },
+    { code: 'CNY', country: 'China', buy: 6.28, sell: 6.35 },
+    { code: 'TRY', country: 'Turquia', buy: 1.34, sell: 1.36 },
+    { code: 'RUB', country: 'Rusia', buy: 0.45, sell: 0.47 },
+    { code: 'USD', country: 'E.U.A.', buy: 45.75, sell: 45.85 },
+    { code: 'CAD', country: 'Canada', buy: 32.65, sell: 32.85 },
+    { code: 'INR', country: 'India', buy: 0.54, sell: 0.56 },
+    { code: 'JPY', country: 'Japon', buy: 0.29, sell: 0.31 },
 ];
 
 const statisticsData: StatItem[] = [
   {
     id: 'inflacion-kpi',
-    title: 'Inflación Mensual',
-    value: 2.4,
+    title: 'Inflación Mensual (Oct)',
+    value: 4.0,
     unit: '%',
-    trend: 0.2,
+    trend: 3.2,
     category: 'Macroeconomía',
     type: 'card',
-    description: 'Variación del Índice Nacional de Precios al Consumidor.'
+    description: 'Variación del IPC General para el mes de Octubre 2024.'
+  },
+  {
+    id: 'inflacion-acum',
+    title: 'Inflación Acumulada',
+    value: 16.6,
+    unit: '%',
+    trend: 5.4,
+    category: 'Macroeconomía',
+    type: 'card',
+    description: 'Variación acumulada de precios desde Enero hasta Octubre 2024.'
+  },
+  {
+    id: 'inflacion-inter',
+    title: 'Inflación Interanual',
+    value: 23.6,
+    unit: '%',
+    trend: -12.0,
+    category: 'Macroeconomía',
+    type: 'card',
+    description: 'Variación de precios respecto a Octubre de 2023.'
   },
   {
     id: 'inflacion-chart',
-    title: 'Evolución de la Inflación',
+    title: 'Serie Histórica IPC 2024',
     value: 0, 
     unit: '',
     trend: 0,
     category: 'Macroeconomía',
     type: 'chart_large',
     component: <InflationChart />,
-    description: 'Comportamiento de la variación de precios en los últimos 6 meses.'
-  },
-  {
-    id: 'pib-kpi',
-    title: 'Proyección PIB 2025',
-    value: 4.5,
-    unit: '%',
-    trend: 1.1,
-    category: 'Macroeconomía',
-    type: 'card',
-    description: 'Estimación de crecimiento económico anual.'
+    description: 'Evolución mensual de la inflación durante el año 2024.'
   },
   {
     id: 'dolar-bcv',
     title: 'Dólar Oficial (BCV)',
-    value: 276.58,
+    value: 45.85,
     unit: 'VES',
-    trend: 0.15,
+    trend: 1.2,
     category: 'Monetario',
     type: 'card',
-    description: 'Tipo de cambio ponderado del sistema bancario.'
-  },
-  {
-    id: 'reservas',
-    title: 'Reservas Internacionales',
-    value: 9850,
-    unit: 'MM $',
-    trend: -0.5,
-    category: 'Monetario',
-    type: 'card',
-    description: 'Disponibilidad de divisas en el Banco Central.'
-  },
-  {
-    id: 'liquidez',
-    title: 'Liquidez Monetaria',
-    value: 78.4,
-    unit: 'Billones VES',
-    trend: 3.2,
-    category: 'Monetario',
-    type: 'card',
-    description: 'M2: Total de dinero circulante en la economía.'
+    description: 'Tipo de cambio ponderado del sistema bancario nacional.'
   },
   {
     id: 'exchange-chart',
@@ -170,44 +143,14 @@ const statisticsData: StatItem[] = [
     description: 'Comparativa entre tasa oficial y mercado paralelo.'
   },
   {
-    id: 'oil-production',
-    title: 'Producción Petrolera',
-    value: 850,
-    unit: 'k bpd',
-    trend: 1.8,
-    category: 'Energía',
-    type: 'card',
-    description: 'Barriles por día según fuentes secundarias OPEP.'
-  },
-  {
-    id: 'oil-price',
-    title: 'Cesta Merey',
-    value: 64.30,
-    unit: 'USD/bl',
-    trend: -1.2,
-    category: 'Energía',
-    type: 'card',
-    description: 'Precio promedio del crudo venezolano de referencia.'
-  },
-  {
     id: 'food-basket',
     title: 'Canasta Alimentaria',
     value: 540.32,
     unit: 'USD',
-    trend: 1.2,
+    trend: 4.0,
     category: 'Social',
     type: 'card',
-    description: 'Costo para una familia de 5 personas (Cendas).'
-  },
-  {
-    id: 'min-wage',
-    title: 'Ingreso Mínimo Integral',
-    value: 130,
-    unit: 'USD',
-    trend: 0,
-    category: 'Social',
-    type: 'card',
-    description: 'Salario base + Bono de Guerra Económica indexado.'
+    description: 'Costo para una familia de 5 personas (Ref: Octubre).'
   }
 ];
 
@@ -225,8 +168,9 @@ const CurrencyConverter: React.FC = () => {
     }, []);
 
     const handleSwap = () => {
+        const tempFrom = fromCurrency;
         setFromCurrency(toCurrency);
-        setToCurrency(fromCurrency);
+        setToCurrency(tempFrom);
     };
 
     useEffect(() => {
@@ -262,7 +206,7 @@ const CurrencyConverter: React.FC = () => {
                     </div>
                     <div>
                         <h3 className="text-xl font-bold">Convertidor Oficial BCV</h3>
-                        <p className="text-xs text-blue-200">Tasas oficiales del 16/12/2025</p>
+                        <p className="text-xs text-blue-200">Tasas oficiales referenciales</p>
                     </div>
                 </div>
 
@@ -312,14 +256,14 @@ const CurrencyConverter: React.FC = () => {
                     <div className="text-center md:text-left mb-4 md:mb-0">
                         <p className="text-sm text-blue-200 mb-1">Resultado de la conversión</p>
                         <div className="flex items-baseline gap-2 justify-center md:justify-start">
-                            <span className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">{formatNumber(result, 4)}</span>
+                            <span className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">{formatNumber(result, 2)}</span>
                             <span className="text-xl font-bold text-ven-yellow">{toCurrency}</span>
                         </div>
                     </div>
                     <div className="text-center md:text-right">
                         <p className="text-xs text-blue-200 mb-1 font-mono uppercase">Tasa Aplicada</p>
                         <p className="text-sm font-bold text-white">
-                            1 {fromCurrency} = {formatNumber(rateUsed, 6)} {toCurrency}
+                            1 {fromCurrency} = {formatNumber(rateUsed, 4)} {toCurrency}
                         </p>
                     </div>
                 </div>
@@ -337,7 +281,7 @@ const ExchangeRatesTable: React.FC = () => {
                         <Landmark className="text-ven-blue dark:text-ven-yellow w-5 h-5" /> Tipos de Cambio Oficiales
                     </h3>
                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                        Tasas de referencia publicadas por el Banco Central de Venezuela al 16/12/2025.
+                        Tasas de referencia publicadas por el Banco Central de Venezuela.
                     </p>
                 </div>
             </div>
@@ -361,10 +305,10 @@ const ExchangeRatesTable: React.FC = () => {
                                     {rate.country}
                                 </td>
                                 <td className="px-6 py-4 text-right font-mono text-gray-700 dark:text-gray-200">
-                                    {formatNumber(rate.buy, 4)}
+                                    {formatNumber(rate.buy, 2)}
                                 </td>
                                 <td className="px-6 py-4 text-right font-mono font-bold text-gray-800 dark:text-white">
-                                    {formatNumber(rate.sell, 4)}
+                                    {formatNumber(rate.sell, 2)}
                                 </td>
                             </tr>
                         ))}
@@ -409,123 +353,96 @@ const Statistics: React.FC = () => {
       <div className="container mx-auto px-4">
         
         <nav className="mb-8 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400" aria-label="Breadcrumb">
-            <Link to="/estadisticas" className="hover:text-ven-blue dark:hover:text-ven-yellow flex items-center gap-1 transition-colors">
-                <ArrowLeft size={14} /> Centro de Estadísticas
-            </Link>
-            <span className="text-gray-300">/</span>
-            <span className="font-bold text-ven-blue dark:text-ven-yellow">{currentCategory}</span>
+            <Link to="/estadisticas" className="hover:text-ven-blue">Estadísticas</Link>
+            {currentCategory !== 'Todos' && (
+                <>
+                    <span className="text-gray-300">/</span>
+                    <span className="font-bold text-gray-800 dark:text-white">{currentCategory}</span>
+                </>
+            )}
         </nav>
 
-        <header className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between mb-10">
-            <div className="flex items-start gap-4">
-                <div className={`p-3 rounded-2xl shadow-sm ${
-                    currentCategory === 'Energía' ? 'bg-orange-100 text-orange-600 dark:bg-orange-900/30' :
-                    currentCategory === 'Monetario' ? 'bg-blue-100 text-ven-blue dark:bg-blue-900/30' :
-                    currentCategory === 'Social' ? 'bg-purple-100 text-purple-600 dark:bg-purple-900/30' :
-                    'bg-red-100 text-ven-red dark:bg-red-900/30'
-                }`}>
-                    {categoryInfo[currentCategory as string]?.icon || <PieChart />}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
+            <div className="max-w-2xl">
+                <div className="flex items-center gap-4 mb-4">
+                    <div className="bg-ven-blue text-white p-3 rounded-2xl shadow-lg shadow-ven-blue/20">
+                        {currentCategory !== 'Todos' ? categoryInfo[currentCategory].icon : <PieChart className="w-8 h-8"/>}
+                    </div>
+                    <h1 className="text-3xl md:text-5xl font-black text-ven-dark dark:text-white tracking-tight leading-none">
+                        {currentCategory === 'Todos' ? 'Panel de Indicadores' : currentCategory}
+                    </h1>
                 </div>
-                <div>
-                    <h1 className="text-3xl font-extrabold text-ven-dark dark:text-white mb-1">{currentCategory}</h1>
-                    <p className="text-gray-600 dark:text-gray-400 max-w-xl text-sm leading-relaxed">
-                        {categoryInfo[currentCategory as string]?.description}
-                    </p>
-                </div>
-            </div>
-
-            <div className="relative w-full md:w-80 group">
-                <Search className="absolute left-3 top-3 text-gray-400 group-focus-within:text-ven-blue transition-colors w-5 h-5" />
-                <input 
-                    type="text" 
-                    placeholder={`Buscar en ${currentCategory}...`} 
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-ven-blue dark:focus:ring-ven-yellow transition-all shadow-sm"
-                />
-            </div>
-        </header>
-
-        {currentCategory === 'Monetario' && <CurrencyConverter />}
-
-        {filteredData.length > 0 ? (
-            <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-slide-up">
-                {filteredData.map((item) => {
-                    if (item.type === 'card') {
-                        return (
-                            <article key={item.id} className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 hover:border-ven-blue/20 dark:hover:border-ven-yellow/20 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col justify-between">
-                                <div className="space-y-4">
-                                    <div className="flex justify-between items-start">
-                                        <div className="flex flex-col">
-                                            <span className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1">{item.category}</span>
-                                            <h3 className="text-base font-bold text-gray-700 dark:text-gray-200 leading-snug group-hover:text-ven-blue dark:group-hover:text-ven-yellow transition-colors">{item.title}</h3>
-                                        </div>
-                                        <div className="text-gray-200 dark:text-gray-700">
-                                            <BarChart3 size={20}/>
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="flex flex-col">
-                                        <div className="flex items-baseline gap-1.5">
-                                            <span className="text-4xl font-black text-ven-dark dark:text-white tracking-tighter">
-                                                {typeof item.value === 'number' ? formatNumber(item.value, item.unit === 'VES' ? 2 : item.unit === '%' ? 1 : 0) : item.value}
-                                            </span>
-                                            <span className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase">{item.unit}</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="mt-6 pt-4 border-t border-gray-50 dark:border-slate-800/50 flex items-center justify-between">
-                                    <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black shadow-sm ${
-                                        item.trend > 0 ? 'bg-red-50 text-ven-red dark:bg-red-900/30 dark:text-red-300' : 
-                                        item.trend < 0 ? 'bg-green-50 text-green-600 dark:bg-green-900/30 dark:text-green-300' : 
-                                        'bg-gray-100 text-gray-500 dark:bg-slate-800 dark:text-gray-400'
-                                    }`}>
-                                        {item.trend > 0 ? <TrendingUp size={14}/> : 
-                                         item.trend < 0 ? <TrendingDown size={14}/> : 
-                                         <Minus size={14}/>}
-                                        {Math.abs(item.trend)}%
-                                    </div>
-                                    <span className="text-[10px] text-gray-400 dark:text-gray-500 font-bold uppercase tracking-tighter">Var. Mensual</span>
-                                </div>
-                            </article>
-                        );
-                    } 
-                    else if (item.type === 'chart_large') {
-                        return (
-                            <section key={item.id} className="col-span-1 md:col-span-2 bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 transition-colors">
-                                <div className="flex justify-between items-center mb-6">
-                                    <div>
-                                        <div className="flex items-center gap-2 mb-1">
-                                            <span className="w-2 h-2 rounded-full bg-ven-blue dark:bg-ven-yellow"></span>
-                                            <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">{item.category}</p>
-                                        </div>
-                                        <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">{item.title}</h3>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">{item.description}</p>
-                                    </div>
-                                </div>
-                                {item.component}
-                            </section>
-                        );
-                    }
-                    return null;
-                })}
-            </main>
-        ) : (
-            <div className="bg-gray-50 dark:bg-slate-900/50 rounded-2xl p-12 text-center border-2 border-dashed border-gray-200 dark:border-slate-800 animate-fade-in mt-8">
-                <Search className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-                <h3 className="text-lg font-bold text-gray-600 dark:text-gray-400">No encontramos indicadores</h3>
-                <p className="text-gray-400 dark:text-gray-500 mt-2 mb-4">
-                    No hay datos que coincidan con "{searchQuery}" en esta categoría.
+                <p className="text-lg text-gray-500 dark:text-gray-400 leading-relaxed">
+                    {currentCategory !== 'Todos' ? categoryInfo[currentCategory].description : 'Exploración técnica de las variables críticas de la economía venezolana.'}
                 </p>
-                <button onClick={() => setSearchQuery('')} className="text-ven-blue dark:text-ven-yellow font-bold hover:underline">
-                    Limpiar búsqueda
-                </button>
             </div>
-        )}
-        
-        {currentCategory === 'Monetario' && <ExchangeRatesTable />}
+            
+            <div className="w-full md:w-auto">
+                <div className="relative group">
+                    <Search className="absolute left-4 top-3.5 text-gray-400 group-focus-within:text-ven-blue transition-colors" size={20} />
+                    <input 
+                        type="text" 
+                        placeholder="Buscar variable..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full md:w-80 pl-12 pr-4 py-3.5 rounded-2xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-ven-blue dark:focus:ring-ven-yellow transition-all shadow-sm"
+                    />
+                </div>
+            </div>
+        </div>
 
+        {currentCategory === 'Monetario' || currentCategory === 'Todos' ? <CurrencyConverter /> : null}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-slide-up">
+            {filteredData.map((item) => (
+                <div 
+                    key={item.id} 
+                    className={`bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-3xl overflow-hidden transition-all hover:shadow-xl hover:shadow-gray-200/50 dark:hover:shadow-none
+                        ${item.type === 'chart_large' ? 'md:col-span-2 lg:col-span-2' : ''}`}
+                >
+                    <div className="p-7">
+                        <div className="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 className="font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
+                                    {item.title}
+                                </h3>
+                                <p className="text-xs text-gray-400 font-medium uppercase tracking-widest mt-0.5">{item.category}</p>
+                            </div>
+                            {item.trend !== 0 && (
+                                <div className={`flex items-center gap-1 text-xs font-black px-2 py-1 rounded-lg border
+                                    ${item.trend > 0 ? 'bg-red-50 text-ven-red border-red-100' : 'bg-green-50 text-green-600 border-green-100'}`}>
+                                    {item.trend > 0 ? <TrendingUp size={12}/> : <TrendingDown size={12}/>}
+                                    {formatNumber(Math.abs(item.trend), 1)}%
+                                </div>
+                            )}
+                        </div>
+                        
+                        {item.type === 'card' && (
+                            <div className="mb-4">
+                                <div className="flex items-baseline gap-2">
+                                    <span className="text-4xl font-black text-gray-900 dark:text-white tracking-tight">
+                                        {typeof item.value === 'number' ? formatNumber(item.value, item.unit === 'VES' ? 2 : 1) : item.value}
+                                    </span>
+                                    <span className="text-lg font-bold text-gray-400">{item.unit}</span>
+                                </div>
+                            </div>
+                        )}
+
+                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
+                            {item.description}
+                        </p>
+
+                        {item.type === 'chart_large' && (
+                            <div className="mt-4 pt-4 border-t border-gray-50 dark:border-slate-800">
+                                {item.component}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        {(currentCategory === 'Monetario' || currentCategory === 'Todos') && <ExchangeRatesTable />}
       </div>
     </div>
   );

@@ -67,10 +67,10 @@ const Home: React.FC = () => {
                                 <div className="bg-red-50 dark:bg-red-900/20 p-2.5 rounded-xl">
                                     <TrendingUp className="text-ven-red dark:text-red-400 w-6 h-6" />
                                 </div>
-                                <span className="text-[10px] font-bold text-ven-red dark:text-red-300 bg-red-50 dark:bg-red-900/30 px-2 py-1 rounded-md border border-red-100 dark:border-red-900/50">+{formatNumber(2.4, 1)}%</span>
+                                <span className="text-[10px] font-bold text-ven-red dark:text-red-300 bg-red-50 dark:bg-red-900/30 px-2 py-1 rounded-md border border-red-100 dark:border-red-900/50">Oct 2024</span>
                             </div>
-                            <p className="text-sm font-semibold text-gray-400 dark:text-gray-500 mb-1 uppercase tracking-wide">Inflación Venezuela</p>
-                            <p className="text-3xl font-extrabold text-gray-800 dark:text-white">{formatNumber(2.4, 1)}%</p>
+                            <p className="text-sm font-semibold text-gray-400 dark:text-gray-500 mb-1 uppercase tracking-wide">Inflación Mensual</p>
+                            <p className="text-3xl font-extrabold text-gray-800 dark:text-white">{formatNumber(4.0, 1)}%</p>
                         </div>
                         
                         <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 animate-slide-up" style={{animationDelay: '200ms'}}>
@@ -81,7 +81,7 @@ const Home: React.FC = () => {
                                 <span className="text-[10px] font-bold text-ven-blue dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded-md border border-blue-100 dark:border-blue-900/50">Tasa Oficial</span>
                             </div>
                             <p className="text-sm font-semibold text-gray-400 dark:text-gray-500 mb-1 uppercase tracking-wide">Dólar BCV</p>
-                            <p className="text-3xl font-extrabold text-gray-800 dark:text-white">{formatNumber(276.58)} <span className="text-sm text-gray-400 font-medium font-sans">VES</span></p>
+                            <p className="text-3xl font-extrabold text-gray-800 dark:text-white">{formatNumber(45.85, 2)} <span className="text-sm text-gray-400 font-medium font-sans">VES</span></p>
                         </div>
                         
                         <div className="bg-ven-dark dark:bg-slate-800 p-6 rounded-2xl shadow-xl shadow-ven-blue/20 col-span-2 transform -translate-y-4 border border-ven-blue/30 animate-slide-up" style={{animationDelay: '300ms'}}>
@@ -99,9 +99,9 @@ const Home: React.FC = () => {
                                     <p className="text-3xl font-extrabold text-white">{formatCurrency(540.32, 'USD')}</p>
                                 </div>
                                 <div className="text-right">
-                                    <p className="text-xs text-gray-400">Canasta Cendas</p>
-                                    <p className="text-xs text-green-400 font-bold flex items-center justify-end gap-1">
-                                        <TrendingUp size={12}/> +{formatNumber(1.2, 1)}%
+                                    <p className="text-xs text-gray-400">Canasta Cendas (Oct)</p>
+                                    <p className="text-xs text-red-400 font-bold flex items-center justify-end gap-1">
+                                        <TrendingUp size={12}/> +{formatNumber(4.0, 1)}%
                                     </p>
                                 </div>
                             </div>
@@ -129,7 +129,7 @@ const Home: React.FC = () => {
                     
                     <div className="bg-white dark:bg-slate-900 p-7 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 transition-colors">
                         <div className="flex items-center justify-between mb-8">
-                            <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 border-l-4 border-ven-red pl-3">Evolución Histórica de Precios</h3>
+                            <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 border-l-4 border-ven-red pl-3">Evolución del IPC (2024)</h3>
                         </div>
                         <InflationChart />
                     </div>
@@ -169,7 +169,7 @@ const Home: React.FC = () => {
                         <p className="text-xs text-blue-100 mb-4 leading-relaxed">
                             Análisis de impacto social en Venezuela (Periodo 2025).
                         </p>
-                        <Link to="/blog/ocha-marzo-abril-2025" className="bg-white text-ven-blue px-4 py-2 rounded-lg text-xs font-bold inline-block">
+                        <Link to="/blog/ocha-report" className="bg-white text-ven-blue px-4 py-2 rounded-lg text-xs font-bold inline-block">
                             Consultar Reporte
                         </Link>
                     </div>

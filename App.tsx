@@ -14,7 +14,6 @@ import VenezuelaCruceCaminos from './pages/posts/VenezuelaCruceCaminos';
 import DesordenResultadoPolitico from './pages/posts/DesordenResultadoPolitico';
 import CookieBanner from './components/CookieBanner';
 import { initializeGoogleAnalytics, trackPageView, hasAnalyticsConsent } from './services/analytics';
-import Ticker from './components/Ticker';
 
 const AnalyticsTracker = () => {
   const location = useLocation();
@@ -37,7 +36,6 @@ function App() {
     <Router>
       <div className="min-h-screen bg-ven-light dark:bg-slate-950 font-sans text-gray-900 dark:text-gray-100 flex flex-col transition-colors duration-300">
         <AnalyticsTracker />
-        <Ticker />
         <Navbar />
         <CookieBanner />
 
