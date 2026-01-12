@@ -15,6 +15,16 @@ interface Doc {
 
 const docsData: Doc[] = [
   { 
+    title: "Saldos monetarios reales y aportes desde la economía conductual y el caos: caso Venezuela", 
+    organization: "Contreras & Medina",
+    type: "Artículo de Investigación", 
+    date: "Ene 16, 2025", 
+    size: "Ver PDF", 
+    category: "Estudios",
+    fileUrl: "https://drive.google.com/file/d/18RKms9cJKZDXD1PG08I1_eppSLnh3sGB/view?usp=sharing", 
+    isExternal: true
+  },
+  { 
     title: "Venezuela ante el cruce de caminos: lo que puede pasar (y lo que no)", 
     organization: "OEV",
     type: "Análisis Político-Económico", 
@@ -39,7 +49,7 @@ const docsData: Doc[] = [
     organization: "OEV",
     type: "Informe Trimestral", 
     date: "Oct 15, 2023", 
-    size: "2.4 MB", 
+    size: "2,4 MB", 
     category: "Informes OEV",
     fileUrl: "documentos/oev-informe-q3-2023.pdf", 
     isExternal: false
@@ -49,7 +59,7 @@ const docsData: Doc[] = [
     organization: "OEV",
     type: "Estudio Especial", 
     date: "Sep 28, 2023", 
-    size: "1.8 MB", 
+    size: "1,8 MB", 
     category: "Estudios",
     fileUrl: "documentos/oev-industria-petrolera.pdf",
     isExternal: false
@@ -59,7 +69,7 @@ const docsData: Doc[] = [
     organization: "OEV",
     type: "Boletín", 
     date: "Ago 30, 2023", 
-    size: "0.5 MB", 
+    size: "0,5 MB", 
     category: "Boletines",
     fileUrl: "documentos/boletin-45.pdf",
     isExternal: false

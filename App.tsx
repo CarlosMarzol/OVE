@@ -12,6 +12,7 @@ import CookiesPolicy from './pages/CookiesPolicy';
 import OchaReportPost from './pages/posts/OchaReportPost';
 import VenezuelaCruceCaminos from './pages/posts/VenezuelaCruceCaminos';
 import DesordenResultadoPolitico from './pages/posts/DesordenResultadoPolitico';
+import SaldosMonetariosPost from './pages/posts/SaldosMonetariosPost';
 import CookieBanner from './components/CookieBanner';
 import { initializeGoogleAnalytics, trackPageView, hasAnalyticsConsent } from './services/analytics';
 
@@ -51,6 +52,7 @@ function App() {
             <Route path="/blog/ocha-report" element={<OchaReportPost />} />
             <Route path="/blog/venezuela-cruce-caminos" element={<VenezuelaCruceCaminos />} />
             <Route path="/blog/desorden-resultado-politico" element={<DesordenResultadoPolitico />} />
+            <Route path="/blog/saldos-monetarios-caos" element={<SaldosMonetariosPost />} />
             <Route path="/boletin" element={<NewsletterPage />} />
             <Route path="/cookies" element={<CookiesPolicy />} />
           </Routes>

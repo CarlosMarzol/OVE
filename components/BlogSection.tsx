@@ -5,6 +5,14 @@ import { Link } from 'react-router-dom';
 
 const posts: BlogPost[] = [
   {
+    id: 'saldos-monetarios-caos',
+    title: 'Saldos monetarios reales, economía conductual y el caos: caso Venezuela',
+    summary: 'Investigación académica que analiza los determinantes de la inflación, identificando umbrales de no-caos y la relevancia de las expectativas de devaluación.',
+    category: 'Estudio Técnico',
+    date: '2025',
+    imageUrl: 'https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2832&auto=format&fit=crop'
+  },
+  {
     id: 'desorden-resultado-politico',
     title: 'El desorden no es un accidente: es un resultado político',
     summary: 'Análisis profundo sobre cómo la incertidumbre y la fragilidad institucional se utilizan como herramientas de poder en la política contemporánea.',
@@ -73,7 +81,7 @@ const BlogSection: React.FC = () => {
                   </div>
                   <div className="flex items-center gap-1">
                      <User className="w-3.5 h-3.5 text-ven-yellow" />
-                     <span>Redacción OEV</span>
+                     <span>OEV Staff</span>
                   </div>
                 </div>
                 
