@@ -11,6 +11,7 @@ import Mission from './pages/Mission';
 import CookiesPolicy from './pages/CookiesPolicy';
 import OchaReportPost from './pages/posts/OchaReportPost';
 import VenezuelaCruceCaminos from './pages/posts/VenezuelaCruceCaminos';
+import DesordenResultadoPolitico from './pages/posts/DesordenResultadoPolitico';
 import CookieBanner from './components/CookieBanner';
 import { initializeGoogleAnalytics, trackPageView, hasAnalyticsConsent } from './services/analytics';
 import Ticker from './components/Ticker';
@@ -51,6 +52,7 @@ function App() {
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/ocha-report" element={<OchaReportPost />} />
             <Route path="/blog/venezuela-cruce-caminos" element={<VenezuelaCruceCaminos />} />
+            <Route path="/blog/desorden-resultado-politico" element={<DesordenResultadoPolitico />} />
             <Route path="/boletin" element={<NewsletterPage />} />
             <Route path="/cookies" element={<CookiesPolicy />} />
           </Routes>
@@ -62,7 +64,6 @@ function App() {
               <div className="grid md:grid-cols-4 gap-10 mb-12">
                   <div className="col-span-1 md:col-span-1">
                       <div className="flex items-center gap-4 mb-6">
-                           {/* Contenedor circular blanco para que el logo destaque sin distorsionarse */}
                            <div className="relative w-14 h-14 flex-shrink-0 bg-white rounded-full p-2 shadow-lg shadow-black/20 flex items-center justify-center">
                               <img 
                                 src={logoUrl} 

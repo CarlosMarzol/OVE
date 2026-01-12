@@ -5,6 +5,14 @@ import { Link } from 'react-router-dom';
 
 const posts: BlogPost[] = [
   {
+    id: 'desorden-resultado-politico',
+    title: 'El desorden no es un accidente: es un resultado político',
+    summary: 'Análisis profundo sobre cómo la incertidumbre y la fragilidad institucional se utilizan como herramientas de poder en la política contemporánea.',
+    category: 'Análisis',
+    date: '20 May, 2025',
+    imageUrl: 'https://lh3.googleusercontent.com/d/1LI9RSfYQFj0RNPMY4zsNvWN2P9OjDUjp'
+  },
+  {
     id: 'venezuela-cruce-caminos',
     title: 'Venezuela ante el cruce de caminos: lo que puede pasar (y lo que no)',
     summary: 'Venezuela vive uno de esos momentos en los que la historia parece acelerarse, pero sin aclarar el rumbo. Análisis sobre los escenarios reales ante el reacomodo del poder.',
@@ -19,14 +27,6 @@ const posts: BlogPost[] = [
     category: 'Humanitario',
     date: '30 Abr, 2025',
     imageUrl: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?q=80&w=2670&auto=format&fit=crop'
-  },
-  {
-    id: 'comercio-mitos',
-    title: 'Recuperación del sector comercio: Mitos y Realidades',
-    summary: 'Un análisis detallado sobre el repunte en ventas minoristas en las principales ciudades del país contrastado con la capacidad de compra real del ciudadano promedio.',
-    category: 'Análisis',
-    date: '12 Oct, 2023',
-    imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop'
   }
 ];
 
