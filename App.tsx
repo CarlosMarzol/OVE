@@ -16,6 +16,15 @@ import SaldosMonetariosPost from './pages/posts/SaldosMonetariosPost';
 import CookieBanner from './components/CookieBanner';
 import { initializeGoogleAnalytics, trackPageView, hasAnalyticsConsent } from './services/analytics';
 
+// Componente auxiliar para hacer scroll al inicio al cambiar de página
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
+
 const AnalyticsTracker = () => {
   const location = useLocation();
   useEffect(() => {
@@ -34,6 +43,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-ven-light dark:bg-slate-950 font-sans text-gray-900 dark:text-gray-100 flex flex-col transition-colors duration-300">
         <AnalyticsTracker />
         <Navbar />

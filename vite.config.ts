@@ -4,7 +4,9 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  // IMPORTANTE: Cambiado a './' para que funcione en GitHub Pages (subcarpetas)
+  // REPARACIÓN CRÍTICA: Usamos rutas relativas './'
+  // Esto asegura que la aplicación cargue los estilos y scripts correctamente
+  // sin importar si está en la raíz o en una subcarpeta (como suele pasar en GitHub Pages)
   base: './', 
   define: {
     'process.env': process.env

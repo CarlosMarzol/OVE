@@ -24,7 +24,7 @@ const Home: React.FC = () => {
   return (
     <>
       <SEO 
-        title="OEV | Observatorio de Economía de Venezuela" 
+        title="OEV | Observatorio Venezolano de Economía" 
         description="Referencia técnica independiente para el monitoreo de la economía venezolana. Datos de inflación, tipo de cambio y actividad petrolera."
       />
       
@@ -45,7 +45,7 @@ const Home: React.FC = () => {
                 </h1>
                 
                 <p className="text-xl md:text-2xl text-gray-500 dark:text-gray-400 font-serif italic font-medium leading-relaxed max-w-2xl mb-8 border-l-4 border-ven-red pl-4">
-                  "La estadística rigurosa como pilar de la libertad económica."
+                  La estadística rigurosa como pilar de la libertad económica.
                 </p>
 
                 <div className="flex flex-wrap gap-4">
