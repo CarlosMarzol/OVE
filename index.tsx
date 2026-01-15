@@ -7,7 +7,7 @@ if (!rootElement) {
   throw new Error("Could not find root element to mount to");
 }
 
-console.log("%c OEV Frontend v2.0.3 - Cargado Correctamente ", "background: #00247D; color: #fff; padding: 4px; border-radius: 4px;");
+console.log("%c OEV Frontend v2.0.4 - Cargado Correctamente ", "background: #00247D; color: #fff; padding: 4px; border-radius: 4px;");
 
 const root = createRoot(rootElement);
 root.render(<App />);
