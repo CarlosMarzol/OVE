@@ -10,9 +10,9 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     base: './', 
     define: {
-      // Inyección específica de la API Key.
-      // IMPORTANTE: No definir 'process.env' como objeto completo para evitar errores de asignación en librerías.
-      'process.env.API_KEY': JSON.stringify(env.API_KEY)
+      // SOLO definimos la variable específica que necesitamos.
+      // Eliminar la redefinición de 'process.env' completo soluciona el error "Transform failed".
+      'process.env.API_KEY': JSON.stringify(env.API_KEY || "")
     },
     build: {
       chunkSizeWarningLimit: 1000,
