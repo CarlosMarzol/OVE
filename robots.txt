@@ -1,7 +1,8 @@
 User-agent: *
 Allow: /
-Sitemap: https://oev.org.ve/sitemap.xml
-
-# Prevenir rastreo de páginas de configuración si las hubiera
+Allow: /assets/
+Allow: /index.html
 Disallow: /admin
-Disallow: /api/
+Disallow: /private/
+
+Sitemap: https://oev.org.ve/sitemap.xml

@@ -3,21 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO Principal -->
     <title>OEV | Observatorio de Economía de Venezuela - Estadísticas Reales</title>
-    <meta name="description" content="Portal oficial del Observatorio de Economía de Venezuela. Información independiente sobre inflación, PIB, sector petrolero y canasta básica. Datos técnicos sin sesgos políticos.">
-    <meta name="keywords" content="Observatorio de Economía de Venezuela, OEV, economía venezolana, inflación venezuela, pib venezuela, tasa bcv, canasta alimentaria venezuela, producción petrolera venezuela">
+    <meta name="description" content="Portal oficial del Observatorio de Economía de Venezuela. Información técnica independiente sobre inflación, PIB, sector petrolero y canasta básica. Datos sin censura.">
+    <meta name="keywords" content="Venezuela, Economía, Inflación, Dólar BCV, PIB, Petróleo, OEV, Observatorio Venezolano, Estadísticas, Cendas">
     <meta name="author" content="Observatorio de Economía de Venezuela">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
     
-    <!-- Favicon e Iconos para Buscadores (Google Search Logo) -->
+    <!-- Canonical -->
+    <link rel="canonical" href="https://oev.org.ve/" />
+
+    <!-- Open Graph / Facebook / WhatsApp (Previsualización) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://oev.org.ve/">
+    <meta property="og:title" content="OEV | La estadística rigurosa como pilar de la libertad">
+    <meta property="og:description" content="Monitoreo independiente de la economía venezolana. Indicadores macroeconómicos, reportes de inflación y análisis de coyuntura.">
+    <meta property="og:image" content="https://lh3.googleusercontent.com/d/1xmD_TZzJLzviRzNEnKTA7_n8EADxpHPx">
+    <meta property="og:locale" content="es_VE">
+    <meta property="og:site_name" content="Observatorio de Economía de Venezuela">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://oev.org.ve/">
+    <meta name="twitter:title" content="OEV | Observatorio de Economía de Venezuela">
+    <meta name="twitter:description" content="Referencia técnica para el monitoreo de la economía venezolana. Datos independientes.">
+    <meta name="twitter:image" content="https://lh3.googleusercontent.com/d/1xmD_TZzJLzviRzNEnKTA7_n8EADxpHPx">
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1xmD_TZzJLzviRzNEnKTA7_n8EADxpHPx" />
-    <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/d/1xmD_TZzJLzviRzNEnKTA7_n8EADxpHPx" />
     
-    <!-- Tailwind CSS -->
+    <!-- Performance & Preload -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    
+    <script>
+      window.process = { env: { NODE_ENV: 'production' } };
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Fonts: Inter (Datos/UI) + Merriweather (Títulos/Editorial) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
     
+    <!-- Datos Estructurados JSON-LD (Organización) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Observatorio de Economía de Venezuela",
+      "url": "https://oev.org.ve",
+      "logo": "https://lh3.googleusercontent.com/d/1xmD_TZzJLzviRzNEnKTA7_n8EADxpHPx",
+      "sameAs": [
+        "https://twitter.com/oev_ve",
+        "https://www.instagram.com/oev_ve"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "contacto@oev.org.ve",
+        "contactType": "research",
+        "areaServed": "VE"
+      }
+    }
+    </script>
+
     <script>
       tailwind.config = {
         darkMode: 'class',
@@ -29,12 +78,11 @@
             },
             colors: {
               ven: {
-                yellow: '#F7C600', // Gold Yellow
-                blue: '#00247D',   // Deep National Blue
-                red: '#CF142B',    // National Red
-                dark: '#001240',   // Deep Midnight Blue
-                light: '#f8fafc',  // Background light
-                accent: '#FFD700'  
+                yellow: '#F7C600',
+                blue: '#00247D',
+                red: '#CF142B',
+                dark: '#001240',
+                light: '#f8fafc'
               }
             },
             animation: {
@@ -43,80 +91,42 @@
               'marquee': 'marquee 45s linear infinite',
             },
             keyframes: {
-              fadeIn: {
-                '0%': { opacity: '0' },
-                '100%': { opacity: '1' },
-              },
-              slideUp: {
-                '0%': { transform: 'translateY(20px)', opacity: '0' },
-                '100%': { transform: 'translateY(0)', opacity: '1' },
-              },
-              marquee: {
-                '0%': { transform: 'translateX(0%)' },
-                '100%': { transform: 'translateX(-100%)' },
-              }
+              fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+              slideUp: { '0%': { transform: 'translateY(20px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+              marquee: { '0%': { transform: 'translateX(0%)' }, '100%': { transform: 'translateX(-100%)' } }
             }
           }
         }
       }
     </script>
     <style>
-      body {
-        font-family: 'Inter', sans-serif;
-        background-color: #f8fafc;
-        transition: background-color 0.3s ease;
-      }
-      
-      h1, h2, h3, h4, h5, h6 {
-        font-family: 'Merriweather', serif;
-        letter-spacing: -0.02em;
-      }
-      
-      .dark body {
-        background-color: #020617;
-      }
-      
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-      .dark ::-webkit-scrollbar-track {
-        background: #0f172a;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #94a3b8;
-        border-radius: 4px;
-      }
-      .dark ::-webkit-scrollbar-thumb {
-        background: #334155;
-      }
-      .tricolor-border-top {
-        background: linear-gradient(90deg, #F7C600 33.33%, #00247D 33.33%, #00247D 66.66%, #CF142B 66.66%);
-        height: 4px;
-        width: 100%;
-      }
+      body { font-family: 'Inter', sans-serif; background-color: #f8fafc; margin: 0; }
+      h1, h2, h3, h4 { font-family: 'Merriweather', serif; }
+      .dark body { background-color: #020617; }
+      #root { min-height: 100vh; display: flex; flex-direction: column; }
     </style>
-  <script type="importmap">
+
+    <script type="importmap">
 {
   "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
-    "recharts": "https://aistudiocdn.com/recharts@^3.5.1",
-    "react-markdown": "https://aistudiocdn.com/react-markdown@^10.1.0",
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.10.0",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
-    "vite": "https://aistudiocdn.com/vite@^7.2.6"
+    "react": "https://esm.sh/react@18.3.1",
+    "react/": "https://esm.sh/react@18.3.1/",
+    "react-dom": "https://esm.sh/react-dom@18.3.1",
+    "react-dom/": "https://esm.sh/react-dom@18.3.1/",
+    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.22.3?deps=react@18.3.1,react-dom@18.3.1",
+    "lucide-react": "https://esm.sh/lucide-react@0.454.0?deps=react@18.3.1",
+    "recharts": "https://esm.sh/recharts@2.12.2?deps=react@18.3.1,react-dom@18.3.1",
+    "react-markdown": "https://esm.sh/react-markdown@9.0.1?deps=react@18.3.1",
+    "@google/genai": "https://esm.sh/@google/genai@1.31.0",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
 }
 </script>
-</head>
+  </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    <script type="module" src="index.tsx"></script>
   </body>
 </html>

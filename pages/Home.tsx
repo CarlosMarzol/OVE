@@ -1,184 +1,237 @@
 import React from 'react';
-import { TrendingUp, DollarSign, ShoppingBasket, ArrowUpRight, BarChart3, ShieldCheck, Globe, BookOpen } from 'lucide-react';
+import { 
+  TrendingUp, 
+  DollarSign, 
+  ShoppingBasket, 
+  ArrowUpRight, 
+  BarChart3, 
+  ShieldCheck, 
+  ArrowRight,
+  Droplets,
+  Calendar as CalendarIcon,
+  FileText,
+  PieChart,
+  Activity
+} from 'lucide-react';
 import SEO from '../components/SEO';
-import EconomicCalendar from '../components/EconomicCalendar';
 import { InflationChart } from '../components/Charts';
 import BlogSection from '../components/BlogSection';
+import GeminiAnalyst from '../components/GeminiAnalyst';
 import Newsletter from '../components/Newsletter';
-import { formatNumber, formatCurrency } from '../utils/format';
 import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
   return (
     <>
       <SEO 
-        title="Observatorio de Economía de Venezuela - Datos y Estadísticas" 
-        description="El Observatorio de Economía de Venezuela (OEV) es la fuente independiente líder en análisis de inflación, PIB, tipo de cambio y sector petrolero en Venezuela."
+        title="OEV | Observatorio de Economía de Venezuela" 
+        description="Referencia técnica independiente para el monitoreo de la economía venezolana. Datos de inflación, tipo de cambio y actividad petrolera."
       />
       
-      {/* Hero Section */}
-      <section className="relative bg-white dark:bg-slate-950 pt-28 pb-20 overflow-hidden transition-colors duration-300">
-        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] z-0 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#00247D 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-                <div className="animate-slide-up">
-                    <div className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-ven-blue/5 dark:bg-ven-blue/20 text-ven-blue dark:text-blue-300 text-xs font-bold tracking-widest uppercase mb-6 border border-ven-blue/10 dark:border-ven-blue/30">
-                        <span className="w-2 h-2 rounded-full bg-ven-yellow animate-pulse"></span>
-                        Portal Oficial OEV
-                    </div>
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-ven-dark dark:text-white leading-[1.1] mb-6 tracking-tight">
-                        Observatorio de <br/>
-                        <span className="relative inline-block text-ven-blue dark:text-ven-yellow">
-                             Economía de Venezuela
-                             <svg className="absolute w-full h-3 -bottom-1 left-0 text-ven-yellow opacity-80" viewBox="0 0 100 10" preserveAspectRatio="none">
-                                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="6" fill="none" />
-                             </svg>
-                        </span>
-                        <span className="block mt-2 text-3xl md:text-4xl lg:text-5xl text-gray-500 dark:text-gray-400 font-bold">Estadísticas e Informes Independientes.</span>
-                    </h1>
-                    
-                    <div className="my-8 relative pl-6 border-l-4 border-ven-yellow bg-gray-50/50 dark:bg-slate-900/50 p-4 rounded-r-lg max-w-lg">
-                      <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 italic font-serif leading-relaxed">
-                        Análisis técnico del sistema financiero, mercado cambiario y sector energético nacional.
-                      </p>
-                    </div>
-
-                    <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed max-w-lg">
-                        Acceda a indicadores macroeconómicos de Venezuela actualizados: Inflación, Canasta Alimentaria, Tasa BCV y Producción Petrolera.
-                    </p>
-                    <div className="flex flex-wrap gap-4">
-                        <Link to="/estadisticas" className="bg-ven-blue text-white px-8 py-3.5 rounded-lg font-bold hover:bg-ven-dark hover:shadow-ven-blue/40 transition-all shadow-xl shadow-ven-blue/20 transform hover:-translate-y-1">
-                            Explorar Indicadores
-                        </Link>
-                        <Link to="/mision" className="bg-white dark:bg-slate-800 text-ven-dark dark:text-white border-2 border-ven-dark/10 dark:border-slate-600 px-8 py-3.5 rounded-lg font-bold hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
-                            Nuestra Metodología
-                        </Link>
-                    </div>
+      {/* --- INSTITUTIONAL HERO --- */}
+      <section className="relative pt-32 pb-12 bg-white dark:bg-slate-950 transition-colors duration-300 border-b border-gray-100 dark:border-slate-800">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            
+            {/* Left: Authority Statement */}
+            <div className="lg:col-span-7 animate-fade-in">
+                <div className="inline-flex items-center gap-2 py-1.5 px-3 rounded-md bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 text-[10px] font-bold tracking-widest uppercase mb-6 border border-gray-200 dark:border-slate-700">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  Datos Oficiales OEV • Actualización: Octubre 2024
                 </div>
                 
-                {/* Hero Stats Visual */}
-                <div className="relative">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-br from-ven-blue/5 to-ven-yellow/10 dark:from-ven-blue/10 dark:to-ven-yellow/5 rounded-full filter blur-3xl -z-10"></div>
-                    
-                    <div className="grid grid-cols-2 gap-5">
-                        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 transform translate-y-8 animate-slide-up" style={{animationDelay: '100ms'}}>
-                            <div className="flex items-start justify-between mb-4">
-                                <div className="bg-red-50 dark:bg-red-900/20 p-2.5 rounded-xl">
-                                    <TrendingUp className="text-ven-red dark:text-red-400 w-6 h-6" />
-                                </div>
-                                <span className="text-[10px] font-bold text-ven-red dark:text-red-300 bg-red-50 dark:bg-red-900/30 px-2 py-1 rounded-md border border-red-100 dark:border-red-900/50">Oct 2024</span>
-                            </div>
-                            <p className="text-sm font-semibold text-gray-400 dark:text-gray-500 mb-1 uppercase tracking-wide">Inflación Mensual</p>
-                            <p className="text-3xl font-extrabold text-gray-800 dark:text-white">{formatNumber(4.0, 1)}%</p>
-                        </div>
-                        
-                        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 animate-slide-up" style={{animationDelay: '200ms'}}>
-                             <div className="flex items-start justify-between mb-4">
-                                <div className="bg-blue-50 dark:bg-blue-900/20 p-2.5 rounded-xl">
-                                    <DollarSign className="text-ven-blue dark:text-blue-400 w-6 h-6" />
-                                </div>
-                                <span className="text-[10px] font-bold text-ven-blue dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded-md border border-blue-100 dark:border-blue-900/50">Tasa Oficial</span>
-                            </div>
-                            <p className="text-sm font-semibold text-gray-400 dark:text-gray-500 mb-1 uppercase tracking-wide">Dólar BCV</p>
-                            <p className="text-3xl font-extrabold text-gray-800 dark:text-white">{formatNumber(45.85, 2)} <span className="text-sm text-gray-400 font-medium font-sans">VES</span></p>
-                        </div>
-                        
-                        <div className="bg-ven-dark dark:bg-slate-800 p-6 rounded-2xl shadow-xl shadow-ven-blue/20 col-span-2 transform -translate-y-4 border border-ven-blue/30 animate-slide-up" style={{animationDelay: '300ms'}}>
-                             <div className="flex items-start justify-between mb-3">
-                                <div className="bg-white/10 p-2.5 rounded-xl backdrop-blur-sm">
-                                    <ShoppingBasket className="text-ven-yellow w-6 h-6" />
-                                </div>
-                                <Link to="/estadisticas" className="text-xs font-bold text-ven-yellow flex items-center hover:underline">
-                                    Ver Canasta Alimentaria <ArrowUpRight className="w-3 h-3 ml-1"/>
-                                </Link>
-                            </div>
-                            <div className="flex justify-between items-end">
-                                <div>
-                                    <p className="text-sm font-semibold text-gray-400 mb-1 uppercase tracking-wide">Costo de Vida en Venezuela</p>
-                                    <p className="text-3xl font-extrabold text-white">{formatCurrency(540.32, 'USD')}</p>
-                                </div>
-                                <div className="text-right">
-                                    <p className="text-xs text-gray-400">Canasta Cendas (Oct)</p>
-                                    <p className="text-xs text-red-400 font-bold flex items-center justify-end gap-1">
-                                        <TrendingUp size={12}/> +{formatNumber(4.0, 1)}%
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <h1 className="text-4xl md:text-6xl font-black text-ven-dark dark:text-white mb-6 leading-[1.1] font-serif tracking-tight">
+                  Observatorio Venezolano de <span className="text-ven-blue dark:text-ven-yellow">Economía</span>
+                </h1>
+                
+                <p className="text-xl md:text-2xl text-gray-500 dark:text-gray-400 font-serif italic font-medium leading-relaxed max-w-2xl mb-8 border-l-4 border-ven-red pl-4">
+                  "La estadística rigurosa como pilar de la libertad económica."
+                </p>
+
+                <div className="flex flex-wrap gap-4">
+                    <Link to="/estadisticas" className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-ven-dark text-white font-bold text-sm hover:bg-ven-blue transition-all shadow-xl shadow-ven-dark/20">
+                        <Activity size={18} /> Monitor de Mercado
+                    </Link>
+                    <Link to="/publicaciones" className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-slate-700 font-bold text-sm hover:bg-gray-50 dark:hover:bg-slate-700 transition-all">
+                        <FileText size={18} /> Últimos Informes
+                    </Link>
                 </div>
             </div>
+
+            {/* Right: Key Indicators Snapshot */}
+            <div className="lg:col-span-5">
+                <div className="grid grid-cols-2 gap-4">
+                     {[
+                      { label: 'Tipo de Cambio BCV', val: '45.85', unit: 'VES', trend: '+0.15%', Icon: DollarSign, color: 'text-ven-dark dark:text-white' },
+                      { label: 'Inflación Mensual', val: '4.0', unit: '%', trend: '+3.2%', Icon: TrendingUp, color: 'text-ven-red' },
+                      { label: 'Canasta Alimentaria', val: '540.32', unit: 'USD', trend: '+4.0%', Icon: ShoppingBasket, color: 'text-ven-blue dark:text-blue-400' },
+                      { label: 'Cesta Merey', val: '64.30', unit: 'USD', trend: '-1.2%', Icon: Droplets, color: 'text-gray-800 dark:text-gray-200' },
+                    ].map((kpi, i) => (
+                      <div key={i} className="bg-gray-50 dark:bg-slate-900/50 p-5 rounded-xl border border-gray-100 dark:border-slate-800 hover:border-ven-blue/30 transition-all group">
+                        <div className="flex justify-between items-start mb-2">
+                            <kpi.Icon className="w-5 h-5 text-gray-400 group-hover:text-ven-blue transition-colors" />
+                            <span className={`text-[10px] font-black px-1.5 py-0.5 rounded ${kpi.trend.includes('+') ? 'bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400' : 'bg-green-50 text-green-600 dark:bg-green-900/20 dark:text-green-400'}`}>
+                                {kpi.trend}
+                            </span>
+                        </div>
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{kpi.label}</p>
+                        <p className={`text-2xl font-black font-serif mt-1 ${kpi.color}`}>
+                            {kpi.val} <span className="text-xs font-sans text-gray-400 font-bold">{kpi.unit}</span>
+                        </p>
+                      </div>
+                    ))}
+                </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Main Stats Section */}
-      <section className="py-20 bg-ven-light dark:bg-slate-950 transition-colors duration-300">
+      {/* --- INTELLIGENCE DASHBOARD SECTION --- */}
+      <section className="py-16 bg-ven-light dark:bg-slate-950 transition-colors">
         <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-3 gap-8">
-                {/* Left Column: Charts */}
-                <div className="lg:col-span-2 space-y-8">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                         <div>
-                            <h2 className="text-2xl font-bold text-ven-dark dark:text-white flex items-center gap-2">
-                                <BarChart3 className="text-ven-blue dark:text-ven-yellow"/> Economía Venezolana: Indicadores Clave
-                            </h2>
-                            <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Análisis econométrico basado en series históricas del Observatorio.</p>
-                         </div>
-                    </div>
-                    
-                    <div className="bg-white dark:bg-slate-900 p-7 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 transition-colors">
-                        <div className="flex items-center justify-between mb-8">
-                            <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 border-l-4 border-ven-red pl-3">Evolución del IPC (2024)</h3>
+            
+            <div className="flex items-end justify-between mb-8">
+                <div>
+                    <h2 className="text-2xl font-black text-ven-dark dark:text-white flex items-center gap-2">
+                        <BarChart3 className="text-ven-blue" /> Inteligencia Económica
+                    </h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Análisis de datos en tiempo real y proyecciones IA.</p>
+                </div>
+                <Link to="/estadisticas" className="text-sm font-bold text-ven-blue hover:underline hidden md:block">
+                    Ver todos los indicadores &rarr;
+                </Link>
+            </div>
+
+            <div className="grid lg:grid-cols-12 gap-8 items-start">
+                
+                {/* Main Chart Area */}
+                <div className="lg:col-span-8 bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-slate-800 p-1 shadow-sm">
+                    <div className="p-6 border-b border-gray-100 dark:border-slate-800 flex justify-between items-center">
+                        <div>
+                            <h3 className="font-bold text-gray-800 dark:text-white">Evolución del Índice Nacional de Precios</h3>
+                            <p className="text-xs text-gray-400 uppercase tracking-wide">Octubre 2023 - Octubre 2024</p>
                         </div>
+                        <div className="flex gap-2">
+                             <div className="w-3 h-3 rounded-full bg-ven-red"></div>
+                             <span className="text-xs font-bold text-gray-500">Inflación</span>
+                        </div>
+                    </div>
+                    <div className="p-6">
                         <InflationChart />
                     </div>
                 </div>
-                
-                {/* Right Column: Information Section */}
-                <div className="lg:col-span-1 space-y-6">
-                    <div className="bg-white dark:bg-slate-900 p-7 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 transition-colors">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="bg-ven-blue/10 p-2.5 rounded-lg">
-                                <ShieldCheck className="text-ven-blue w-6 h-6" />
-                            </div>
-                            <h3 className="font-bold text-lg text-gray-800 dark:text-white">Sobre el Observatorio</h3>
-                        </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-                            El OEV provee datos confiables sobre la economía venezolana para académicos, periodistas y tomadores de decisiones.
-                        </p>
+
+                {/* Sidebar Intelligence */}
+                <div className="lg:col-span-4 space-y-6">
+                    {/* Gemini Component */}
+                    <GeminiAnalyst />
+
+                    {/* Next Events Mini Calendar */}
+                    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-slate-800 p-6">
+                        <h3 className="font-bold text-gray-800 dark:text-white mb-4 flex items-center gap-2 text-sm uppercase tracking-wider">
+                            <CalendarIcon className="w-4 h-4 text-ven-yellow" /> Agenda Económica
+                        </h3>
                         <div className="space-y-4">
-                            <Link to="/mision" className="flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-slate-800 hover:bg-ven-blue hover:text-white transition-all group">
-                                <span className="text-sm font-bold">Metodología de Análisis</span>
-                                <ArrowUpRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                            </Link>
-                            <Link to="/publicaciones" className="flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-slate-800 hover:bg-ven-blue hover:text-white transition-all group">
-                                <span className="text-sm font-bold">Descargar Informes</span>
-                                <BookOpen size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                            </Link>
+                            <div className="flex gap-4 items-start">
+                                <div className="bg-gray-100 dark:bg-slate-800 rounded-lg p-2 text-center min-w-[50px]">
+                                    <span className="block text-xs font-bold text-gray-500 uppercase">Nov</span>
+                                    <span className="block text-xl font-black text-ven-dark dark:text-white">01</span>
+                                </div>
+                                <div>
+                                    <p className="text-sm font-bold text-gray-800 dark:text-gray-200">Canasta Cendas</p>
+                                    <p className="text-xs text-gray-500">Publicación valor canasta básica.</p>
+                                </div>
+                            </div>
+                            <div className="flex gap-4 items-start">
+                                <div className="bg-gray-100 dark:bg-slate-800 rounded-lg p-2 text-center min-w-[50px]">
+                                    <span className="block text-xs font-bold text-gray-500 uppercase">Nov</span>
+                                    <span className="block text-xl font-black text-ven-dark dark:text-white">15</span>
+                                </div>
+                                <div>
+                                    <p className="text-sm font-bold text-gray-800 dark:text-gray-200">Liquidez Monetaria</p>
+                                    <p className="text-xs text-gray-500">Cierre semanal BCV.</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-                    <EconomicCalendar />
-
-                    <div className="bg-ven-blue text-white p-6 rounded-2xl shadow-lg relative overflow-hidden group">
-                        <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform">
-                            <Globe size={120} />
-                        </div>
-                        <h3 className="font-bold mb-2 text-lg">Reportes Humanitarios</h3>
-                        <p className="text-xs text-blue-100 mb-4 leading-relaxed">
-                            Análisis de impacto social en Venezuela (Periodo 2025).
-                        </p>
-                        <Link to="/blog/ocha-report" className="bg-white text-ven-blue px-4 py-2 rounded-lg text-xs font-bold inline-block">
-                            Consultar Reporte
-                        </Link>
                     </div>
                 </div>
             </div>
         </div>
       </section>
 
+      {/* --- CAPABILITIES SECTION (Institutional Pillars) --- */}
+      <section className="py-20 bg-white dark:bg-slate-950 border-t border-gray-100 dark:border-slate-800">
+          <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto text-center mb-16">
+                  <h2 className="text-3xl md:text-4xl font-black text-ven-dark dark:text-white mb-6 font-serif">
+                      Infraestructura de Datos para la Toma de Decisiones
+                  </h2>
+                  <p className="text-gray-500 dark:text-gray-400 text-lg">
+                      Combinamos levantamiento de campo tradicional con modelos econométricos modernos para cubrir los vacíos de información oficial.
+                  </p>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-8">
+                  {/* Card 1 */}
+                  <div className="group p-8 rounded-2xl bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-800 hover:border-ven-blue/50 transition-all hover:-translate-y-1">
+                      <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition-transform">
+                          <Activity className="text-ven-blue" size={24} />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Macroeconomía</h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                          Seguimiento diario de tipos de cambio, reservas internacionales y agregados monetarios para anticipar tendencias inflacionarias.
+                      </p>
+                      <Link to="/estadisticas" className="text-sm font-bold text-ven-blue flex items-center gap-1 hover:gap-2 transition-all">
+                          Explorar Datos <ArrowRight size={14} />
+                      </Link>
+                  </div>
+
+                  {/* Card 2 */}
+                  <div className="group p-8 rounded-2xl bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-800 hover:border-ven-yellow/50 transition-all hover:-translate-y-1">
+                      <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition-transform">
+                          <PieChart className="text-ven-yellow" size={24} />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Sector Real</h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                          Estimaciones de actividad económica, consumo masivo y producción petrolera independiente de PDVSA.
+                      </p>
+                      <Link to="/estadisticas/energia" className="text-sm font-bold text-ven-yellow flex items-center gap-1 hover:gap-2 transition-all">
+                          Ver Producción <ArrowRight size={14} />
+                      </Link>
+                  </div>
+
+                  {/* Card 3 */}
+                  <div className="group p-8 rounded-2xl bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-800 hover:border-ven-red/50 transition-all hover:-translate-y-1">
+                      <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition-transform">
+                          <FileText className="text-ven-red" size={24} />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Análisis Estructural</h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                          Informes de profundidad sobre distorsiones de precios, economía conductual y riesgos regulatorios.
+                      </p>
+                      <Link to="/publicaciones" className="text-sm font-bold text-ven-red flex items-center gap-1 hover:gap-2 transition-all">
+                          Leer Informes <ArrowRight size={14} />
+                      </Link>
+                  </div>
+              </div>
+          </div>
+      </section>
+      
+      {/* Blog & Newsletter Sections remain for engagement */}
       <BlogSection />
+      
+      <div className="bg-ven-dark py-16 text-center">
+          <div className="container mx-auto px-4">
+              <h2 className="text-2xl font-bold text-white mb-6">Compromiso con la Transparencia</h2>
+              <p className="text-gray-400 max-w-2xl mx-auto mb-8">
+                  Nuestra metodología y principios de independencia están detallados públicamente. Entienda cómo construimos nuestros indicadores.
+              </p>
+              <Link to="/mision" className="inline-block px-8 py-3 rounded-full border border-white/20 text-white font-bold hover:bg-white hover:text-ven-dark transition-all">
+                  Conozca nuestra Metodología
+              </Link>
+          </div>
+      </div>
+
       <Newsletter />
     </>
   );

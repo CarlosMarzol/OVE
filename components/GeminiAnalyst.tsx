@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Sparkles, Loader2, BookOpen, BrainCircuit } from 'lucide-react';
 import { getEconomicAnalysis } from '../services/geminiService';
@@ -21,10 +20,16 @@ const GeminiAnalyst: React.FC = () => {
     if (selectedTopic === AnalysisTopic.INFLATION) context = "Inflación mensual junio 2.4%, acumulada 50% aprox.";
     if (selectedTopic === AnalysisTopic.EXCHANGE) context = "Brecha cambiaria aumentando al 10%.";
     
-    const result = await getEconomicAnalysis(selectedTopic, context);
-    setAnalysis(result);
-    setLoading(false);
-    setHasGenerated(true);
+    try {
+      const result = await getEconomicAnalysis(selectedTopic, context);
+      // Ensure result is a string to avoid object rendering errors
+      setAnalysis(typeof result === 'string' ? result : String(result));
+    } catch (e) {
+      setAnalysis("Error al generar el análisis.");
+    } finally {
+      setLoading(false);
+      setHasGenerated(true);
+    }
   };
 
   return (

@@ -30,7 +30,6 @@ const AnalyticsTracker = () => {
 };
 
 function App() {
-  // URL directa optimizada para el logo
   const logoUrl = "https://lh3.googleusercontent.com/d/1xmD_TZzJLzviRzNEnKTA7_n8EADxpHPx";
 
   return (
