@@ -24,7 +24,7 @@ const Home: React.FC = () => {
   return (
     <>
       <SEO 
-        title="OEV | Observatorio Venezolano de Economía" 
+        title="Inicio" 
         description="Referencia técnica independiente para el monitoreo de la economía venezolana. Datos de inflación, tipo de cambio y actividad petrolera."
       />
       
@@ -41,7 +41,7 @@ const Home: React.FC = () => {
                 </div>
                 
                 <h1 className="text-4xl md:text-6xl font-black text-ven-dark dark:text-white mb-6 leading-[1.1] font-serif tracking-tight">
-                  Observatorio Venezolano de <span className="text-ven-blue dark:text-ven-yellow">Economía</span>
+                  Observatorio de Economía de <span className="text-ven-blue dark:text-ven-yellow">Venezuela</span>
                 </h1>
                 
                 <p className="text-xl md:text-2xl text-gray-500 dark:text-gray-400 font-serif italic font-medium leading-relaxed max-w-2xl mb-8 border-l-4 border-ven-red pl-4">
@@ -70,7 +70,7 @@ const Home: React.FC = () => {
                       <div key={i} className="bg-gray-50 dark:bg-slate-900/50 p-5 rounded-xl border border-gray-100 dark:border-slate-800 hover:border-ven-blue/30 transition-all group">
                         <div className="flex justify-between items-start mb-2">
                             <kpi.Icon className="w-5 h-5 text-gray-400 group-hover:text-ven-blue transition-colors" />
-                            <span className={`text-[10px] font-black px-1.5 py-0.5 rounded ${kpi.trend.includes('+') ? 'bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400' : 'bg-green-50 text-green-600 dark:bg-green-900/20 dark:text-green-400'}`}>
+                            <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-gray-400">
                                 {kpi.trend}
                             </span>
                         </div>
