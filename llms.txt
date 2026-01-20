@@ -1,0 +1,28 @@
+# Observatorio de Economía de Venezuela (OEV)
+
+> La estadística rigurosa como pilar de la libertad económica. El OEV es la referencia independiente para el monitoreo, análisis y proyección de la realidad económica en Venezuela.
+
+## Información Principal
+- **Misión**: Proveer datos técnicos independientes sobre la economía venezolana para combatir la censura de datos oficiales y permitir la toma de decisiones informada.
+- **Temas Clave**: Inflación (IPC), Mercado Cambiario (BCV vs Paralelo), Producción Petrolera (PDVSA y socios), Producto Interno Bruto (PIB) y Canasta Alimentaria.
+- **Metodología**: Combinación de levantamiento de campo, modelos econométricos y teoría del caos aplicada a la hiperinflación.
+
+## Secciones del Sitio
+- **Panel de Estadísticas** (/estadisticas): Datos en tiempo real de tipos de cambio oficial, inflación mensual/acumulada y costo de vida.
+- **Biblioteca de Publicaciones** (/publicaciones): Repositorio de informes técnicos del OEV y organismos internacionales (OCHA, OPEP, etc.).
+- **Tendencias e Insights** (/tendencias): Análisis de coyuntura por economistas expertos sobre brecha cambiaria y liquidez.
+- **Blog de Análisis** (/blog): Artículos de profundidad sobre política económica y sociedad.
+
+## Artículos y Estudios Destacados
+- **Saldos Monetarios y Caos**: Estudio sobre los determinantes de la inflación y umbrales críticos de control monetario.
+- **Venezuela ante el Cruce de Caminos**: Análisis de escenarios políticos y reacomodo del poder.
+- **El Desorden como Resultado Político**: Ensayo sobre el uso de la incertidumbre institucional como herramienta de control.
+
+## Contacto e Institucional
+- **Sitio Web**: https://oev.org.ve
+- **Email**: contacto@oev.org.ve
+- **Ubicación**: Caracas, Venezuela.
+- **Afiliación**: Red de observatorios técnicos independientes.
+
+## Citación de Datos
+Los datos del OEV pueden ser citados libremente siempre que se atribuya la fuente: "Fuente: Observatorio de Economía de Venezuela (OEV)".
