@@ -107,7 +107,7 @@ function App() {
                   </div>
               </div>
               <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
-                  <p>&copy; 2025 Observatorio de Economía de Venezuela. Todos los derechos reservados. <span className="opacity-40 ml-2">v2.1.2</span></p>
+                  <p>&copy; 2025 Observatorio de Economía de Venezuela. Todos los derechos reservados. <span className="opacity-40 ml-2">v2.1.3</span></p>
               </div>
           </div>
         </footer>

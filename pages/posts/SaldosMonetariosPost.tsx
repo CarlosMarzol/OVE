@@ -127,7 +127,7 @@ const SaldosMonetariosPost: React.FC = () => {
 
                     <h3 className="text-xl font-bold text-ven-blue mt-10">4. Teoría del Caos e Hiperinflación</h3>
                     <p>
-                        El estudio explora cómo una política monetaria expansiva puede empujar la economía hacia un "atractor caótico". Se identifica un umbral crítico (θ > 2.3) donde pequeños cambios tienen efectos desproporcionados, haciendo la inflación virtualmente imposible de controlar mediante medidas lineales tradicionales.
+                        El estudio explora cómo una política monetaria expansiva puede empujar la economía hacia un "atractor caótico". Se identifica un umbral crítico (θ &gt; 2.3) donde pequeños cambios tienen efectos desproporcionados, haciendo la inflación virtualmente imposible de controlar mediante medidas lineales tradicionales.
                     </p>
 
                     {/* Referencias Bibliográficas */}
